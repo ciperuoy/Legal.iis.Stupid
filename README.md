@@ -9,9 +9,9 @@
 
 <p align="center">
 	
-![image](https://github.com/user-attachments/assets/c76a3278-7e81-4fcf-81b0-08e797b1042b)
+<a href="https://github.com/ciperuoy/Legally.Stupid/releases/latest">![image](https://github.com/user-attachments/assets/c76a3278-7e81-4fcf-81b0-08e797b1042b)</a>
 
-<a href="https://github.com/ciperuoy/Legally.Stupid/releases/altest">![image](https://github.com/user-attachments/assets/c76a3278-7e81-4fcf-81b0-08e797b1042b)</a>
+
 
 
 
