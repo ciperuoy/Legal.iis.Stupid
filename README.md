@@ -1,15 +1,15 @@
 
   
 <p align="center">
-  <a href="#"><img src="https://i.imgur.com/aOzcbjM.png"></a>
-  <a href="#"><img src="https://i.imgur.com/W2ZjSPs.png"></a>
+ 
+  <a href="#"><img src="![image](https://github.com/user-attachments/assets/861fb293-1cbc-44d2-b2f3-c21abccee148)"></a>
 </p>
 
 ---
 
 <p align="center">
-	<a href="https://github.com/iiDk-the-actual/iis.Stupid.Menu/releases"><img src="https://img.shields.io/github/v/release/iiDk-the-actual/iis.Stupid.Menu?label=version&style=for-the-badge"></a>
-	<a href="https://github.com/iiDk-the-actual/iis.Stupid.Menu/releases/latest"><img src="https://img.shields.io/github/downloads/iiDk-the-actual/iis.Stupid.Menu/latest/iis_Stupid_Menu.dll?style=for-the-badge"></a>
+	<a href="[https://img.shields.io/badge/VERSION-1.0.0-blue></a>
+	<a href="[https://github.com/iiDk-the-actual/iis.Stupid.Menu/releases/latest](https://github.com/ciperuoy/Legally.Stupid/releases/latest)"><img src="https://img.shields.io/github/downloads/ciperuoy/Legally.Stupid/latest/iis_Stupid_Menu.dll?style=for-the badge"></a>
 	<a href="https://discord.gg/iidk"><img src="https://img.shields.io/badge/discord-11497%20online-blueviolet?style=for-the-badge"></a>
 </p>
 
