@@ -2,8 +2,7 @@
   
 <p align="center">
  
-  <a href="#"><img src="![image](https://github.com/user-attachments/assets/861fb293-1cbc-44d2-b2f3-c21abccee148)"></a>
-</p>
+[image](https://img.shields.io/badge/VERSION-1.0.0-blue.png)
 
 ---
 
