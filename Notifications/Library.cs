@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using BepInEx;
-using iiMenu.Classes;
-using iiMenu.Menu;
+using LegallyStupid.Classes;
+using LegallyStupid.Menu;
 using UnityEngine;
 using UnityEngine.UI;
-using static iiMenu.Menu.Main;
+using static LegallyStupid.Menu.Main;
 
-namespace iiMenu.Notifications
+namespace LegallyStupid.Notifications
 {
     // Originally created by lars, he gave me permission
     // Modified by ii, not much though

@@ -1,6 +1,6 @@
 ﻿using GorillaTag;
 using HarmonyLib;
-using iiMenu.Notifications;
+using LegallyStupid.Notifications;
 using Photon.Pun;
 using Photon.Realtime;
 using PlayFab;
@@ -9,9 +9,9 @@ using PlayFab.Internal;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static iiMenu.Menu.Main;
+using static LegallyStupid.Menu.Main;
 
-namespace iiMenu.Patches
+namespace LegallyStupid.Patches
 {
     [HarmonyPatch(typeof(GorillaNot), "SendReport")]
     public class AntiCheat

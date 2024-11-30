@@ -5,11 +5,11 @@ using System.Diagnostics;
 using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static iiMenu.Classes.RigManager;
-using static iiMenu.Menu.Main;
-using iiMenu.Notifications;
+using static LegallyStupid.Classes.RigManager;
+using static LegallyStupid.Menu.Main;
+using LegallyStupid.Notifications;
 
-namespace iiMenu.Mods
+namespace LegallyStupid.Mods
 {
     public class Miscellaneous
     {

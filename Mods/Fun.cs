@@ -4,10 +4,10 @@ using GorillaNetworking;
 using GorillaTagScripts;
 using GorillaTagScripts.ObstacleCourse;
 using HarmonyLib;
-using iiMenu.Classes;
-using iiMenu.Menu;
-using iiMenu.Mods.Spammers;
-using iiMenu.Notifications;
+using LegallyStupid.Classes;
+using LegallyStupid.Menu;
+using LegallyStupid.Mods.Spammers;
+using LegallyStupid.Notifications;
 using Photon.Pun;
 using Photon.Voice.Unity;
 using Photon.Voice.Unity.UtilityScripts;
@@ -20,10 +20,10 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static iiMenu.Classes.RigManager;
-using static iiMenu.Menu.Main;
+using static LegallyStupid.Classes.RigManager;
+using static LegallyStupid.Menu.Main;
 
-namespace iiMenu.Mods
+namespace LegallyStupid.Mods
 {
     public class Fun
     {
@@ -2046,7 +2046,7 @@ namespace iiMenu.Mods
             if (!File.Exists("iisStupidMenu/shotgun.wav"))
                 LoadSoundFromURL("https://github.com/iiDk-the-actual/ModInfo/raw/refs/heads/main/shotgun.wav", "shotgun.wav");
 
-            iiMenu.Mods.Spammers.Sound.PlayAudio("shotgun.wav");
+            LegallyStupid.Mods.Spammers.Sound.PlayAudio("shotgun.wav");
 
             BuilderPiece bullet = null;
 
@@ -2628,13 +2628,13 @@ namespace iiMenu.Mods
         public static string[] names = new string[] { };
         public static void EnableCustomNameCycle()
         {
-            if (File.Exists("iisStupidMenu/iiMenu_CustomNameCycle.txt"))
+            if (File.Exists("iisStupidMenu/LegallyStupid_CustomNameCycle.txt"))
             {
-                names = File.ReadAllText("iisStupidMenu/iiMenu_CustomNameCycle.txt").Split('\n');
+                names = File.ReadAllText("iisStupidMenu/LegallyStupid_CustomNameCycle.txt").Split('\n');
             }
             else
             {
-                File.WriteAllText("iisStupidMenu/iiMenu_CustomNameCycle.txt","YOUR\nTEXT\nHERE");
+                File.WriteAllText("iisStupidMenu/LegallyStupid_CustomNameCycle.txt","YOUR\nTEXT\nHERE");
             }
         }
 

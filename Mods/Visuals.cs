@@ -1,7 +1,7 @@
 ﻿using GorillaExtensions;
 using GorillaNetworking;
-using iiMenu.Classes;
-using iiMenu.Notifications;
+using LegallyStupid.Classes;
+using LegallyStupid.Notifications;
 using Pathfinding.RVO;
 using Photon.Pun;
 using Photon.Voice.Unity;
@@ -13,9 +13,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
-using static iiMenu.Menu.Main;
+using static LegallyStupid.Menu.Main;
 
-namespace iiMenu.Mods
+namespace LegallyStupid.Mods
 {
     public class Visuals
     {
@@ -532,7 +532,7 @@ namespace iiMenu.Mods
                 {
                     if (!nametags.ContainsKey(vrrig))
                     {
-                        GameObject go = new GameObject("iiMenu_Nametag");
+                        GameObject go = new GameObject("LegallyStupid_Nametag");
                         go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                         TextMesh textMesh = go.AddComponent<TextMesh>();
                         textMesh.fontSize = 48;
@@ -769,7 +769,7 @@ namespace iiMenu.Mods
                         volIndicator.GetComponent<Renderer>().material.shader = Shader.Find("GUI/Text Shader");
                         if (voicetxt == null)
                         {
-                            voicetxt = LoadTextureFromResource("iiMenu.Resources.speak.png");
+                            voicetxt = LoadTextureFromResource("LegallyStupid.Resources.speak.png");
                         }
                         volIndicator.GetComponent<Renderer>().material.mainTexture = voicetxt;
                         volIndicator.GetComponent<Renderer>().material.color = PlayerIsTagged(vrrig) ? (Color)new Color32(255, 111, 0, 255) : vrrig.playerColor;
@@ -805,7 +805,7 @@ namespace iiMenu.Mods
 
                             if (voicetxt == null)
                             {
-                                voicetxt = LoadTextureFromResource("iiMenu.Resources.speak.png");
+                                voicetxt = LoadTextureFromResource("LegallyStupid.Resources.speak.png");
                             }
                             voiceMat.mainTexture = voicetxt;
 

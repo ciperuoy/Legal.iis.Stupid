@@ -1,9 +1,9 @@
-﻿using iiMenu.Menu;
-using iiMenu.Notifications;
+﻿using LegallyStupid.Menu;
+using LegallyStupid.Notifications;
 using System.IO;
-using static iiMenu.Menu.Main;
+using static LegallyStupid.Menu.Main;
 
-namespace iiMenu.Mods
+namespace LegallyStupid.Mods
 {
     public class Presets
     {

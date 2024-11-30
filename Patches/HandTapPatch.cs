@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 using Photon.Realtime;
 using Valve.VR;
 
-namespace iiMenu.Patches
+namespace LegallyStupid.Patches
 {
     [HarmonyPatch(typeof(VRRig), "OnHandTap")]
     public class HandTapPatch

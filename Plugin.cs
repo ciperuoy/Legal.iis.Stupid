@@ -3,22 +3,22 @@ using System;
 using System.ComponentModel;
 using UnityEngine;
 
-namespace iiMenu
+namespace LegallyStupid
 {
     [Description(PluginInfo.Description)]
     [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
     public class Plugin : BaseUnityPlugin
     {
-        private void Start() // To that one dude that uses SMI to inject my menu, it's this method
+        private void Start()
         {
-            Console.Title = "ii's Stupid Menu // Build " + PluginInfo.Version;
+            Console.Title = "Legally Stupid Menu /~/ Build " + PluginInfo.Version;
 
-            iiMenu.Patches.Menu.ApplyHarmonyPatches();
+            Patches.Menu.ApplyHarmonyPatches();
             GameObject Loading = new GameObject();
-            Loading.AddComponent<iiMenu.UI.Main>();
-            Loading.AddComponent<iiMenu.Notifications.NotifiLib>();
-            Loading.AddComponent<iiMenu.Classes.CoroutineManager>();
-            UnityEngine.Object.DontDestroyOnLoad(Loading);
+            Loading.AddComponent<UI.Main>();
+            Loading.AddComponent<Notifications.NotifiLib>();
+            Loading.AddComponent<Classes.CoroutineManager>();
+            DontDestroyOnLoad(Loading);
         }
     }
 }

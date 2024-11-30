@@ -5,8 +5,8 @@ using GorillaNetworking;
 using GorillaTag.Cosmetics;
 using GorillaTagScripts;
 using HarmonyLib;
-using iiMenu.Classes;
-using iiMenu.Notifications;
+using LegallyStupid.Classes;
+using LegallyStupid.Notifications;
 using Meta.WitAi;
 using Photon.Pun;
 using Photon.Realtime;
@@ -16,10 +16,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder.Shapes;
-using static iiMenu.Classes.RigManager;
-using static iiMenu.Menu.Main;
+using static LegallyStupid.Classes.RigManager;
+using static LegallyStupid.Menu.Main;
 
-namespace iiMenu.Mods
+namespace LegallyStupid.Mods
 {
     public class Overpowered
     {

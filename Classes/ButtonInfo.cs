@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace iiMenu.Classes
+namespace LegallyStupid.Classes
 {
     public class ButtonInfo
     {

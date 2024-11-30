@@ -1,16 +1,16 @@
 ﻿using ExitGames.Client.Photon;
 using GorillaNetworking;
-using iiMenu.Classes;
-using iiMenu.Notifications;
+using LegallyStupid.Classes;
+using LegallyStupid.Notifications;
 using Photon.Pun;
 using Photon.Realtime;
 using System.IO;
 using UnityEngine;
 using Valve.VR;
-using static iiMenu.Classes.RigManager;
-using static iiMenu.Menu.Main;
+using static LegallyStupid.Classes.RigManager;
+using static LegallyStupid.Menu.Main;
 
-namespace iiMenu.Mods
+namespace LegallyStupid.Mods
 {
     public class Safety
     {
@@ -454,12 +454,12 @@ namespace iiMenu.Mods
 
         public static void NameSpoofEnabled()
         {
-            iiMenu.Patches.ColorPatch.nameSpoofEnabled = true;
+            LegallyStupid.Patches.ColorPatch.nameSpoofEnabled = true;
         }
 
         public static void NameSpoofDisabled()
         {
-            iiMenu.Patches.ColorPatch.nameSpoofEnabled = false;
+            LegallyStupid.Patches.ColorPatch.nameSpoofEnabled = false;
         }
 
         public static void SpoofName()
@@ -531,12 +531,12 @@ namespace iiMenu.Mods
 
         public static void ColorSpoof()
         {
-            iiMenu.Patches.ColorPatch.patchEnabled = true;
+            LegallyStupid.Patches.ColorPatch.patchEnabled = true;
         }
 
         public static void NoColorSpoof()
         {
-            iiMenu.Patches.ColorPatch.patchEnabled = false;
+            LegallyStupid.Patches.ColorPatch.patchEnabled = false;
         }
     }
 }

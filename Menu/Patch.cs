@@ -2,12 +2,11 @@ using System.Reflection;
 using HarmonyLib;
 using UnityEngine;
 
-namespace iiMenu.Patches
+namespace LegallyStupid.Patches
 {
     public class Menu : MonoBehaviour
     {
         public static bool IsPatched { get; private set; }
-        //public static GameObject pointer { get; internal set; }
 
         internal static void ApplyHarmonyPatches()
         {

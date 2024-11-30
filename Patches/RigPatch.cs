@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace iiMenu.Patches
+namespace LegallyStupid.Patches
 {
     [HarmonyPatch(typeof(VRRig), "OnDisable")]
     public class GhostPatch

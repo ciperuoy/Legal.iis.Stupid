@@ -1,7 +1,7 @@
 ﻿using ExitGames.Client.Photon;
-using iiMenu.Classes;
-using iiMenu.Menu;
-using iiMenu.Notifications;
+using LegallyStupid.Classes;
+using LegallyStupid.Menu;
+using LegallyStupid.Notifications;
 using OVR;
 using Photon.Pun;
 using Photon.Realtime;
@@ -13,9 +13,9 @@ using System.Diagnostics;
 using System.IO;
 using UnityEngine;
 using Valve.VR;
-using static iiMenu.Menu.Main;
+using static LegallyStupid.Menu.Main;
 
-namespace iiMenu.Mods.Spammers
+namespace LegallyStupid.Mods.Spammers
 {
     public class Sound
     {

@@ -1,17 +1,17 @@
 ﻿using ExitGames.Client.Photon;
 using HarmonyLib;
-using iiMenu.Classes;
-using iiMenu.Patches;
+using LegallyStupid.Classes;
+using LegallyStupid.Patches;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static iiMenu.Classes.RigManager;
-using static iiMenu.Menu.Main;
+using static LegallyStupid.Classes.RigManager;
+using static LegallyStupid.Menu.Main;
 
-namespace iiMenu.Mods.Spammers
+namespace LegallyStupid.Mods.Spammers
 {
     public class Projectiles
     {

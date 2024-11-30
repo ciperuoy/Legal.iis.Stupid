@@ -1,10 +1,10 @@
 ﻿using HarmonyLib;
-using iiMenu.Mods;
+using LegallyStupid.Mods;
 using System;
 using UnityEngine;
-using static iiMenu.Menu.Main;
+using static LegallyStupid.Menu.Main;
 
-namespace iiMenu.Patches
+namespace LegallyStupid.Patches
 {
     [HarmonyPatch(typeof(SnowballThrowable), "GetRandomModelIndex")]
     public class SnowballPatch

@@ -4,9 +4,9 @@ using GorillaLocomotion.Climbing;
 using GorillaLocomotion.Swimming;
 using GorillaNetworking;
 using HarmonyLib;
-using iiMenu.Classes;
-using iiMenu.Menu;
-using iiMenu.Notifications;
+using LegallyStupid.Classes;
+using LegallyStupid.Menu;
+using LegallyStupid.Notifications;
 using Oculus.Platform;
 using Photon.Pun;
 using Photon.Realtime;
@@ -20,10 +20,10 @@ using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.XR.Interaction.Toolkit;
 using Valve.VR;
-using static iiMenu.Classes.RigManager;
-using static iiMenu.Menu.Main;
+using static LegallyStupid.Classes.RigManager;
+using static LegallyStupid.Menu.Main;
 
-namespace iiMenu.Mods
+namespace LegallyStupid.Mods
 {
     public class Movement
     {
@@ -1582,7 +1582,7 @@ namespace iiMenu.Mods
                         pearlmat.color = Color.white;
                         if (pearltxt == null)
                         {
-                            pearltxt = LoadTextureFromResource("iiMenu.Resources.pearl.png");
+                            pearltxt = LoadTextureFromResource("LegallyStupid.Resources.pearl.png");
                             pearltxt.filterMode = FilterMode.Point;
                             pearltxt.wrapMode = TextureWrapMode.Clamp;
                         }

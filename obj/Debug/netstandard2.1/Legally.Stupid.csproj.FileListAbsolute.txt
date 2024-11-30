@@ -1,0 +1,2 @@
+D:\Zayne.ZaynesLaptop\Legally.Stupid-master\obj\Debug\netstandard2.1\Legally.Stupid.GeneratedMSBuildEditorConfig.editorconfig
+D:\Zayne.ZaynesLaptop\Legally.Stupid-master\obj\Debug\netstandard2.1\Legally.Stupid.csproj.CoreCompileInputs.cache

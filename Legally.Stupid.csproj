@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<AssemblyName>ii's Stupid Menu</AssemblyName>
+		<AssemblyName>Legally Stupid Menu</AssemblyName>
 		<GenerateAssemblyInfo>False</GenerateAssemblyInfo>
 		<TargetFramework>netstandard2.1</TargetFramework>
 	</PropertyGroup>
@@ -8,22 +8,9 @@
 		<LangVersion>8.0</LangVersion>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
-	<PropertyGroup />
-	<ItemGroup>
-		<None Remove="Resources\icon.png" />
-		<None Remove="Resources\iimenu" />
-		<None Remove="Resources\mlm.png" />
-		<None Remove="Resources\pearl.png" />
-		<None Remove="Resources\pride.jpg" />
-		<None Remove="Resources\pride.png" />
-		<None Remove="Resources\return.png" />
-		<None Remove="Resources\search.png" />
-		<None Remove="Resources\speak.png" />
-		<None Remove="Resources\trans.png" />
-	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="Resources\icon.png" />
-		<EmbeddedResource Include="Resources\iimenu" />
+		<EmbeddedResource Include="Resources\legallystupid" />
 		<EmbeddedResource Include="Resources\mlm.png" />
 		<EmbeddedResource Include="Resources\pride.png" />
 		<EmbeddedResource Include="Resources\return.png" />

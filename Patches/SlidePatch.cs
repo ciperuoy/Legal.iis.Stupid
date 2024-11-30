@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
 using GorillaLocomotion;
-using static iiMenu.Menu.Main;
+using static LegallyStupid.Menu.Main;
 
-namespace iiMenu.Patches
+namespace LegallyStupid.Patches
 {
     [HarmonyPatch(typeof(Player), "GetSlidePercentage")]
     public class SlidePatch

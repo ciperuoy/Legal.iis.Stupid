@@ -1,9 +1,9 @@
 ﻿using GorillaTagScripts;
 using HarmonyLib;
 using UnityEngine;
-using static iiMenu.Menu.Main;
+using static LegallyStupid.Menu.Main;
 
-namespace iiMenu.Patches
+namespace LegallyStupid.Patches
 {
     [HarmonyPatch(typeof(BuilderTableNetworking), "PieceCreatedRPC")]
     public class CreatePatch
@@ -17,7 +17,7 @@ namespace iiMenu.Patches
             {
                 if (pieceTypeSearch == pieceType)
                 {
-                    iiMenu.Mods.Fun.pieceId = pieceId;
+                    LegallyStupid.Mods.Fun.pieceId = pieceId;
                     enabled = false;
                 }
             }

@@ -1,8 +1,8 @@
 using Photon.Pun;
 using UnityEngine;
-using static iiMenu.Menu.Main;
+using static LegallyStupid.Menu.Main;
 
-namespace iiMenu.Classes
+namespace LegallyStupid.Classes
 {
 	public class Button : MonoBehaviour
 	{

@@ -5,10 +5,10 @@ using GorillaNetworking;
 using GorillaTagScripts;
 using GorillaTagScripts.ObstacleCourse;
 using HarmonyLib;
-using iiMenu.Classes;
-using iiMenu.Mods;
-using iiMenu.Mods.Spammers;
-using iiMenu.Notifications;
+using LegallyStupid.Classes;
+using LegallyStupid.Mods;
+using LegallyStupid.Mods.Spammers;
+using LegallyStupid.Notifications;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
@@ -30,20 +30,9 @@ using UnityEngine.UI;
 using UnityEngine.XR;
 using Valve.VR;
 using WebSocketSharp;
-using static iiMenu.Classes.RigManager;
+using static LegallyStupid.Classes.RigManager;
 
-/*
-ii's Stupid Menu, written by @goldentrophy
-Modified by @ciperuoy
-Any comments are dev comments iiDk and ciperuoy wrote.
-Most comments are used to find certain parts of code faster with Ctrl + F
-Feel free to read them if you want
-
-ii's Stupid Menu falls under the GPL-3.0 license
-https://github.com/iiDk-the-actual/iis.Stupid.Menu
-*/
-
-namespace iiMenu.Menu
+namespace LegallyStupid.Menu
 {
     [HarmonyPatch(typeof(GorillaLocomotion.Player), "LateUpdate")]
     public class Main : MonoBehaviour
@@ -321,7 +310,7 @@ namespace iiMenu.Menu
                         }
                         catch (Exception exception)
                         {
-                            UnityEngine.Debug.LogError(string.Format("iiMenu <b>COLOR ERROR</b> {1} - {0}", exception.Message, exception.StackTrace));
+                            UnityEngine.Debug.LogError(string.Format("LegallyStupid <b>COLOR ERROR</b> {1} - {0}", exception.Message, exception.StackTrace));
                             hasFoundAllBoards = false;
                         }
                     }
@@ -720,7 +709,7 @@ namespace iiMenu.Menu
 
                                                         if (admincrown == null)
                                                         {
-                                                            admincrown = LoadTextureFromResource("iiMenu.Resources.icon.png");
+                                                            admincrown = LoadTextureFromResource("LegallyStupid.Resources.icon.png");
                                                         }
                                                         crownmat.mainTexture = admincrown;
 
@@ -1033,11 +1022,11 @@ namespace iiMenu.Menu
                     // Recover from playing sound on soundboard code
                     try
                     {
-                        if (iiMenu.Mods.Spammers.Sound.AudioIsPlaying)
+                        if (LegallyStupid.Mods.Spammers.Sound.AudioIsPlaying)
                         {
-                            if (Time.time > iiMenu.Mods.Spammers.Sound.RecoverTime)
+                            if (Time.time > LegallyStupid.Mods.Spammers.Sound.RecoverTime)
                             {
-                                iiMenu.Mods.Spammers.Sound.FixMicrophone();
+                                LegallyStupid.Mods.Spammers.Sound.FixMicrophone();
                             }
                         }
                     } catch { }
@@ -1081,7 +1070,7 @@ namespace iiMenu.Menu
             }
             catch (Exception exception)
             {
-                UnityEngine.Debug.LogError(string.Format("iiMenu <b>FATAL ERROR</b> {1} - {0}", exception.Message, exception.StackTrace));
+                UnityEngine.Debug.LogError(string.Format("LegallyStupid <b>FATAL ERROR</b> {1} - {0}", exception.Message, exception.StackTrace));
             }
         }
 
@@ -1455,7 +1444,7 @@ namespace iiMenu.Menu
             }.AddComponent<Image>();
             if (searchIcon == null)
             {
-                searchIcon = LoadTextureFromResource("iiMenu.Resources.search.png");
+                searchIcon = LoadTextureFromResource("LegallyStupid.Resources.search.png");
             }
             if (searchMat == null)
             {
@@ -1542,7 +1531,7 @@ namespace iiMenu.Menu
             }.AddComponent<Image>();
             if (returnIcon == null)
             {
-                returnIcon = LoadTextureFromResource("iiMenu.Resources.return.png");
+                returnIcon = LoadTextureFromResource("LegallyStupid.Resources.return.png");
             }
             if (returnMat == null)
             {
@@ -1752,7 +1741,7 @@ namespace iiMenu.Menu
                             case 25:
                                 if (pride == null)
                                 {
-                                    pride = LoadTextureFromResource("iiMenu.Resources.pride.png");
+                                    pride = LoadTextureFromResource("LegallyStupid.Resources.pride.png");
                                     pride.filterMode = FilterMode.Point;
                                     pride.wrapMode = TextureWrapMode.Clamp;
                                 }
@@ -1764,7 +1753,7 @@ namespace iiMenu.Menu
                             case 26:
                                 if (trans == null)
                                 {
-                                    trans = LoadTextureFromResource("iiMenu.Resources.trans.png");
+                                    trans = LoadTextureFromResource("LegallyStupid.Resources.trans.png");
                                     trans.filterMode = FilterMode.Point;
                                     trans.wrapMode = TextureWrapMode.Clamp;
                                 }
@@ -1775,7 +1764,7 @@ namespace iiMenu.Menu
                             case 27:
                                 if (gay == null)
                                 {
-                                    gay = LoadTextureFromResource("iiMenu.Resources.mlm.png");
+                                    gay = LoadTextureFromResource("LegallyStupid.Resources.mlm.png");
                                     gay.filterMode = FilterMode.Point;
                                     gay.wrapMode = TextureWrapMode.Clamp;
                                 }
@@ -1785,7 +1774,7 @@ namespace iiMenu.Menu
                                 break;
                         }
                     }
-                    catch (Exception exception) { UnityEngine.Debug.LogError(string.Format("iiMenu <b>TEXTURE ERROR</b> {1} - {0}", exception.Message, exception.StackTrace)); }
+                    catch (Exception exception) { UnityEngine.Debug.LogError(string.Format("LegallyStupid <b>TEXTURE ERROR</b> {1} - {0}", exception.Message, exception.StackTrace)); }
                 }
                 else
                 {
@@ -3110,7 +3099,7 @@ namespace iiMenu.Menu
         {
             GameObject gameObject = null;
 
-            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("iiMenu.Resources.iimenu");
+            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("LegallyStupid.Resources.LegallyStupid");
             if (stream != null)
             {
                 if (assetBundle == null)
@@ -3134,7 +3123,7 @@ namespace iiMenu.Menu
 
             if (!audioPool.ContainsKey(resourcePath))
             {
-                Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("iiMenu.Resources.iimenu");
+                Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("LegallyStupid.Resources.LegallyStupid");
                 if (stream != null)
                 {
                     if (assetBundle == null)
@@ -3336,7 +3325,7 @@ namespace iiMenu.Menu
             try
             {
                 UnityEngine.Debug.Log("Loading data from GitHub");
-                WebRequest request = WebRequest.Create("https://raw.githubusercontent.com/iiDk-the-actual/ModInfo/main/iiMenu_ServerData.txt");
+                WebRequest request = WebRequest.Create("https://raw.githubusercontent.com/iiDk-the-actual/ModInfo/main/LegallyStupid_ServerData.txt");
                 WebResponse response = request.GetResponse();
                 Stream data = response.GetResponseStream();
                 string html = "";
@@ -4126,7 +4115,7 @@ namespace iiMenu.Menu
         public static void LoadLanguage(string lang)
         {
             UnityEngine.Debug.Log("Loading language from server " + lang);
-            WebRequest request = WebRequest.Create("https://raw.githubusercontent.com/iiDk-the-actual/ModInfo/main/iiMenu_Translate_" + lang + ".txt");
+            WebRequest request = WebRequest.Create("https://raw.githubusercontent.com/iiDk-the-actual/ModInfo/main/LegallyStupid_Translate_" + lang + ".txt");
             WebResponse response = request.GetResponse();
             Stream data = response.GetResponseStream();
             string html = "";
@@ -4396,7 +4385,7 @@ namespace iiMenu.Menu
             }
             catch (Exception exception)
             {
-                UnityEngine.Debug.LogError(string.Format("iiMenu <b>NAME ERROR</b> {1} - {0}", exception.Message, exception.StackTrace));
+                UnityEngine.Debug.LogError(string.Format("LegallyStupid <b>NAME ERROR</b> {1} - {0}", exception.Message, exception.StackTrace));
             }
         }
 
@@ -4722,7 +4711,7 @@ namespace iiMenu.Menu
             shouldLoadDataTime = Time.time + 5f;
             timeMenuStarted = Time.time;
             shouldAttemptLoadData = true;
-            if (File.Exists("iisStupidMenu/iiMenu_EnabledMods.txt") || File.Exists("iisStupidMenu/iiMenu_Preferences.txt"))
+            if (File.Exists("iisStupidMenu/LegallyStupid_EnabledMods.txt") || File.Exists("iisStupidMenu/LegallyStupid_Preferences.txt"))
             {
                 try
                 {
@@ -4838,12 +4827,12 @@ namespace iiMenu.Menu
                              |_|                                     
 ";
 
-        public static string motdTemplate = "You are using build {0}. This menu was created by iiDk (@goldentrophy) and modified by ciperuoy (@ciperuoy) on discord." +
+        public static string motdTemplate = $"You are using build {0}. This menu was created by iiDk (@goldentrophy) and modified by ciperuoy (@ciperuoy) on discord." +
         "This menu is completely free and open sourced, if you paid for this menu you have been scammed. " +
         "There are a total of <b>{1}</b> mods on this menu. " +
         "<color=red>iiDk, if you see this, message me if you want this menu taken down." +
         "If you find issues, please message @ciperuoy on discord" +
-        "<color=blue>github.com/ciperuoy/Legal.iis.Stupid"
+        "<color=blue>github.com/ciperuoy/Legal.iis.Stupid";
 
         public static bool shouldBePC = false;
         public static bool rightPrimary = false;
@@ -4862,7 +4851,7 @@ namespace iiMenu.Menu
             KeyCode.K, KeyCode.L, KeyCode.M, KeyCode.N, KeyCode.O,
             KeyCode.P, KeyCode.Q, KeyCode.R, KeyCode.S, KeyCode.T,
             KeyCode.U, KeyCode.V, KeyCode.W, KeyCode.X, KeyCode.Y,
-            KeyCode.Z, KeyCode.Space, KeyCode.Backspace, KeyCode.Escape // it doesn't fit :(
+            KeyCode.Z, KeyCode.Space, KeyCode.Backspace, KeyCode.Escape
         };
 
         public static Dictionary<string, string> admins = new Dictionary<string, string> { { "47F316437B9BE495", "goldentrophy" } };

@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace iiMenu.Patches
+namespace LegallyStupid.Patches
 {
     [HarmonyPatch(typeof(VRRig), "RequestMaterialColor")]
     public class ColorPatch
@@ -17,7 +17,7 @@ namespace iiMenu.Patches
                 {
                     try
                     {
-                        iiMenu.Mods.Safety.SpoofName();
+                        LegallyStupid.Mods.Safety.SpoofName();
                     }
                     catch { }
                 }
@@ -30,7 +30,7 @@ namespace iiMenu.Patches
                         UnityEngine.Random.Range(0f, 255f) / 255f,
                         UnityEngine.Random.Range(0f, 255f) / 255f
                     });
-                    iiMenu.Menu.Main.RPCProtection();
+                    LegallyStupid.Menu.Main.RPCProtection();
                     return false;
                 }
             }

@@ -4,7 +4,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 
-namespace iiMenu.Classes
+namespace LegallyStupid.Classes
 {
     public class RigManager
     {

@@ -1,12 +1,12 @@
 ﻿using HarmonyLib;
-using iiMenu.Notifications;
+using LegallyStupid.Notifications;
 using Photon.Pun;
 using Photon.Realtime;
 using System.IO;
 using UnityEngine;
-using static iiMenu.Menu.Main;
+using static LegallyStupid.Menu.Main;
 
-namespace iiMenu.Patches
+namespace LegallyStupid.Patches
 {
     [HarmonyPatch(typeof(MonoBehaviourPunCallbacks), "OnPlayerEnteredRoom")]
     public class JoinPatch
@@ -22,7 +22,7 @@ namespace iiMenu.Patches
                     {
                         Directory.CreateDirectory("iisStupidMenu");
                     }
-                    File.WriteAllText("iisStupidMenu/iiMenu_CustomSoundOnJoin.txt", "PlayerJoin");
+                    File.WriteAllText("iisStupidMenu/LegallyStupid_CustomSoundOnJoin.txt", "PlayerJoin");
                 }
                 oldnewplayer = newPlayer;
             }

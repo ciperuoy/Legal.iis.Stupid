@@ -1,9 +1,9 @@
 ﻿using GorillaNetworking;
 using HarmonyLib;
-using iiMenu.Classes;
-using iiMenu.Menu;
-using iiMenu.Mods.Spammers;
-using iiMenu.Notifications;
+using LegallyStupid.Classes;
+using LegallyStupid.Menu;
+using LegallyStupid.Mods.Spammers;
+using LegallyStupid.Notifications;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,9 +15,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Windows.Speech;
-using static iiMenu.Menu.Main;
+using static LegallyStupid.Menu.Main;
 
-namespace iiMenu.Mods
+namespace LegallyStupid.Mods
 {
     public class Settings
     {
@@ -1517,7 +1517,7 @@ namespace iiMenu.Mods
             {
                 Directory.CreateDirectory("iisStupidMenu");
             }
-            if (!File.Exists("iisStupidMenu/iiMenu_CustomThemeColor.txt"))
+            if (!File.Exists("iisStupidMenu/LegallyStupid_CustomThemeColor.txt"))
             {
                 UpdateWriteCustomTheme();
             }
@@ -1766,7 +1766,7 @@ namespace iiMenu.Mods
 
         public static void UpdateReadCustomTheme()
         {
-            string[] linesplit = File.ReadAllText("iisStupidMenu/iiMenu_CustomThemeColor.txt").Split("\n");
+            string[] linesplit = File.ReadAllText("iisStupidMenu/LegallyStupid_CustomThemeColor.txt").Split("\n");
 
             string[] a = linesplit[0].Split(",");
             bgColorA = new Color32(byte.Parse(a[0]), byte.Parse(a[1]), byte.Parse(a[2]), 255);
@@ -1818,7 +1818,7 @@ namespace iiMenu.Mods
 
                 output += Math.Round((Mathf.Round(clr.r * 10) / 10) * 255f).ToString() + "," + Math.Round((Mathf.Round(clr.g * 10) / 10) * 255f).ToString() + "," + Math.Round((Mathf.Round(clr.b * 10) / 10) * 255f).ToString();
             }
-            File.WriteAllText("iisStupidMenu/iiMenu_CustomThemeColor.txt", output);
+            File.WriteAllText("iisStupidMenu/LegallyStupid_CustomThemeColor.txt", output);
         }
 
         public static void FixTheme()
@@ -1833,9 +1833,9 @@ namespace iiMenu.Mods
             {
                 Directory.CreateDirectory("iisStupidMenu");
             }
-            if (!File.Exists("iisStupidMenu/iiMenu_CustomMenuBackground.txt"))
+            if (!File.Exists("iisStupidMenu/LegallyStupid_CustomMenuBackground.txt"))
             {
-                File.WriteAllText("iisStupidMenu/iiMenu_CustomMenuBackground.txt", "");
+                File.WriteAllText("iisStupidMenu/LegallyStupid_CustomMenuBackground.txt", "");
             }
 
             if (File.Exists("iisStupidMenu/MenuBG.png"))
@@ -1843,7 +1843,7 @@ namespace iiMenu.Mods
                 File.Delete("iisStupidMenu/MenuBG.png");
             }
             doCustomMenuBackground = true;
-            customMenuBackgroundImage = LoadTextureFromURL(File.ReadAllText("iisStupidMenu/iiMenu_CustomMenuBackground.txt"), "MenuBG.png");
+            customMenuBackgroundImage = LoadTextureFromURL(File.ReadAllText("iisStupidMenu/LegallyStupid_CustomMenuBackground.txt"), "MenuBG.png");
             ReloadMenu();
         }
 
@@ -2223,11 +2223,11 @@ namespace iiMenu.Mods
             {
                 Directory.CreateDirectory("iisStupidMenu");
             }
-            if (!File.Exists("iisStupidMenu/iiMenu_CustomMenuName.txt"))
+            if (!File.Exists("iisStupidMenu/LegallyStupid_CustomMenuName.txt"))
             {
-                File.WriteAllText("iisStupidMenu/iiMenu_CustomMenuName.txt", "Your Text Here");
+                File.WriteAllText("iisStupidMenu/LegallyStupid_CustomMenuName.txt", "Your Text Here");
             }
-            customMenuName = File.ReadAllText("iisStupidMenu/iiMenu_CustomMenuName.txt");
+            customMenuName = File.ReadAllText("iisStupidMenu/LegallyStupid_CustomMenuName.txt");
         }
 
         public static void NoCustomMenuName()
@@ -2464,7 +2464,7 @@ namespace iiMenu.Mods
             {
                 Directory.CreateDirectory("iisStupidMenu");
             }
-            File.WriteAllText("iisStupidMenu/iiMenu_Preferences.txt", SavePreferencesToText());
+            File.WriteAllText("iisStupidMenu/LegallyStupid_Preferences.txt", SavePreferencesToText());
         }
 
         public static void LegacyLoadPreferences()
@@ -2472,7 +2472,7 @@ namespace iiMenu.Mods
             Panic();
             try
             {
-                string config = File.ReadAllText("iisStupidMenu/iiMenu_EnabledMods.txt");
+                string config = File.ReadAllText("iisStupidMenu/LegallyStupid_EnabledMods.txt");
                 string[] activebuttons = config.Split("\n");
                 for (int index = 0; index < activebuttons.Length; index++)
                 {
@@ -2483,7 +2483,7 @@ namespace iiMenu.Mods
 
             try
             {
-                string favez = File.ReadAllText("iisStupidMenu/iiMenu_FavoriteMods.txt");
+                string favez = File.ReadAllText("iisStupidMenu/LegallyStupid_FavoriteMods.txt");
                 string[] favz = favez.Split("\n");
 
                 favorites.Clear();
@@ -2496,7 +2496,7 @@ namespace iiMenu.Mods
 
             try
             {
-                string MODDER = File.ReadAllText("iisStupidMenu/iiMenu_ModData.txt");
+                string MODDER = File.ReadAllText("iisStupidMenu/LegallyStupid_ModData.txt");
                 string[] data = MODDER.Split("\n");
 
                 platformMode = int.Parse(data[0]) - 1;
@@ -2539,9 +2539,9 @@ namespace iiMenu.Mods
             } // Legacy, do not add
             catch { }
 
-            string pager = File.ReadAllText("iisStupidMenu/iiMenu_PageType.txt");
-            string themer = File.ReadAllText("iisStupidMenu/iiMenu_Theme.txt");
-            string fonter = File.ReadAllText("iisStupidMenu/iiMenu_Font.txt");
+            string pager = File.ReadAllText("iisStupidMenu/LegallyStupid_PageType.txt");
+            string themer = File.ReadAllText("iisStupidMenu/LegallyStupid_Theme.txt");
+            string fonter = File.ReadAllText("iisStupidMenu/LegallyStupid_Font.txt");
 
             pageButtonType = int.Parse(pager) - 1;
             Toggle("Change Page Type");
@@ -2637,20 +2637,20 @@ namespace iiMenu.Mods
             {
                 if (Directory.Exists("iisStupidMenu"))
                 {
-                    if (File.Exists("iisStupidMenu/iiMenu_EnabledMods.txt"))
+                    if (File.Exists("iisStupidMenu/LegallyStupid_EnabledMods.txt"))
                     {
                         LegacyLoadPreferences();
-                        File.Delete("iisStupidMenu/iiMenu_EnabledMods.txt");
-                        File.Delete("iisStupidMenu/iiMenu_FavoriteMods.txt");
-                        File.Delete("iisStupidMenu/iiMenu_ModData.txt");
-                        File.Delete("iisStupidMenu/iiMenu_PageType.txt");
-                        File.Delete("iisStupidMenu/iiMenu_Theme.txt");
-                        File.Delete("iisStupidMenu/iiMenu_Font.txt");
+                        File.Delete("iisStupidMenu/LegallyStupid_EnabledMods.txt");
+                        File.Delete("iisStupidMenu/LegallyStupid_FavoriteMods.txt");
+                        File.Delete("iisStupidMenu/LegallyStupid_ModData.txt");
+                        File.Delete("iisStupidMenu/LegallyStupid_PageType.txt");
+                        File.Delete("iisStupidMenu/LegallyStupid_Theme.txt");
+                        File.Delete("iisStupidMenu/LegallyStupid_Font.txt");
                         SavePreferences();
                     }
                     else
                     {
-                        string text = File.ReadAllText("iisStupidMenu/iiMenu_Preferences.txt");
+                        string text = File.ReadAllText("iisStupidMenu/LegallyStupid_Preferences.txt");
                         LoadPreferencesFromText(text);
                     }
                 }

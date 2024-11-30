@@ -1,8 +1,8 @@
 ﻿using ExitGames.Client.Photon;
 using GorillaNetworking;
-using iiMenu.Classes;
-using iiMenu.Mods.Spammers;
-using iiMenu.Notifications;
+using LegallyStupid.Classes;
+using LegallyStupid.Mods.Spammers;
+using LegallyStupid.Notifications;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
@@ -10,11 +10,11 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static iiMenu.Menu.Main;
-using static iiMenu.Classes.RigManager;
+using static LegallyStupid.Menu.Main;
+using static LegallyStupid.Classes.RigManager;
 using System.IO;
 
-namespace iiMenu.Mods
+namespace LegallyStupid.Mods
 {
     public class Experimental
     {
@@ -751,7 +751,7 @@ namespace iiMenu.Mods
                                 VRRig vrrig = GetVRRigFromPlayer(PhotonNetwork.NetworkingClient.CurrentRoom.GetPlayer(data.Sender, false));
                                 if (!nametags.ContainsKey(vrrig))
                                 {
-                                    GameObject go = new GameObject("iiMenu_Nametag");
+                                    GameObject go = new GameObject("LegallyStupid_Nametag");
                                     go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                                     TextMesh textMesh = go.AddComponent<TextMesh>();
                                     textMesh.fontSize = 48;

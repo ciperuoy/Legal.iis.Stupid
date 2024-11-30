@@ -1,7 +1,7 @@
 ﻿using BepInEx;
 using GorillaNetworking;
-using iiMenu.Classes;
-using iiMenu.Menu;
+using LegallyStupid.Classes;
+using LegallyStupid.Menu;
 using Photon.Pun;
 using System;
 using System.Collections.Generic;
@@ -10,20 +10,12 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using UnityEngine;
-using static iiMenu.Menu.Main;
+using static LegallyStupid.Menu.Main;
 
-namespace iiMenu.UI
+namespace LegallyStupid.UI
 {
     public class Main : MonoBehaviour
     {
-        private string inputText = "goldentrophy";
-
-        private string r = "255";
-
-        private string g = "128";
-
-        private string b = "0";
-
         public static bool isOpen = true;
 
         public static bool lastCondition = false;
@@ -52,7 +44,7 @@ namespace iiMenu.UI
 
         private void Start()
         {
-            if (File.Exists("iisStupidMenu/iiMenu_HideGUI.txt"))
+            if (File.Exists("iisStupidMenu/LegallyStupid_HideGUI.txt"))
             {
                 isOpen = false;
             }
@@ -67,15 +59,15 @@ namespace iiMenu.UI
                 isOpen = !isOpen;
                 if (isOpen)
                 {
-                    if (File.Exists("iisStupidMenu/iiMenu_HideGUI.txt"))
+                    if (File.Exists("iisStupidMenu/LegallyStupid_HideGUI.txt"))
                     {
-                        File.Delete("iisStupidMenu/iiMenu_HideGUI.txt");
+                        File.Delete("iisStupidMenu/LegallyStupid_HideGUI.txt");
                     }
                 } else
                 {
-                    if (!File.Exists("iisStupidMenu/iiMenu_HideGUI.txt"))
+                    if (!File.Exists("iisStupidMenu/LegallyStupid_HideGUI.txt"))
                     {
-                        File.WriteAllText("iisStupidMenu/iiMenu_HideGUI.txt", "true");
+                        File.WriteAllText("iisStupidMenu/LegallyStupid_HideGUI.txt", "true");
                     }
                 }
             }
@@ -111,7 +103,7 @@ namespace iiMenu.UI
                 {
                     if (icon == null)
                     {
-                        icon = LoadTextureFromResource("iiMenu.Resources.icon.png");
+                        icon = LoadTextureFromResource("LegallyStupid.Resources.icon.png");
                     }
                 }
                 catch { }
@@ -137,35 +129,6 @@ namespace iiMenu.UI
                 GUI.Box(new Rect(Screen.width - 250, 10, 240, 120), "", GUI.skin.box);
 
                 inputText = GUI.TextField(new Rect(Screen.width - 200, 20, 180, 20), inputText);
-
-                r = GUI.TextField(new Rect(Screen.width - 240, 20, 30, 20), r);
-
-                g = GUI.TextField(new Rect(Screen.width - 240, 50, 30, 20), g);
-
-                b = GUI.TextField(new Rect(Screen.width - 240, 80, 30, 20), b);
-
-                if (GUI.Button(new Rect(Screen.width - 200, 50, 85, 30), "Name"))
-                {
-                    try
-                    {
-                        GorillaComputer.instance.currentName = inputText;
-                        PhotonNetwork.LocalPlayer.NickName = inputText;
-                        GorillaComputer.instance.offlineVRRigNametagText.text = inputText;
-                        GorillaComputer.instance.savedName = inputText;
-                        PlayerPrefs.SetString("playerName", inputText);
-                        PlayerPrefs.Save();
-                    }
-                    catch
-                    {
-                        UnityEngine.Debug.Log("lemming is yet to fix me");
-                    }
-                }
-                if (GUI.Button(new Rect(Screen.width - 105, 50, 85, 30), "Color"))
-                {
-                    UnityEngine.Color color = new Color32(byte.Parse(r), byte.Parse(g), byte.Parse(b), 255);
-
-                    ChangeColor(color);
-                }
                 bool Create = false;
                 try
                 {
@@ -176,7 +139,7 @@ namespace iiMenu.UI
                     if (Create)
                     {
                         string toJoin = inputText.Replace("\\n", "\n");
-                        iiMenu.Mods.Important.CreateRoom(toJoin, true);
+                        Mods.Important.CreateRoom(toJoin, true);
                     } else
                     {
                         string toJoin = inputText.Replace("\\n", "\n");
@@ -238,7 +201,7 @@ namespace iiMenu.UI
                 }
                 catch
                 {
-                    UnityEngine.Debug.Log("FUCKKK");
+                    Debug.Log("FUCKKK");
                 }
             }
         }
