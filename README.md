@@ -14,21 +14,20 @@
 
 
 
-
 	
 </p>
 
 ---
 
 # Legally Stupid
-Legally Stupid is a mod menu for Gorilla Tag, created by iiDk and modified by ciperuoy. This menu is designed to be as useful as possible by providing any variety of features and options you would ever need. With Legally Stupid, you can explore new functionalities, experiment with different settings, and enjoy a more personalized modding experience. I modified this menu to allow for great pleasure of using this menu without cheating.
+Legally Stupid is a mod menu for Gorilla Tag, originally created under the name of "II's Stupid Menu" by iiDk. "II's Stupid Menu" was then renamed to "Legally Stupid" as a legal version of this menu, making it not a cheat by ciperuoy. This menu is designed to be as useful as possible by providing any variety of features and options you would ever need. With Legally Stupid, you can explore new functionalities, experiment with different settings, and enjoy a more personalized modding experience. I modified this menu to allow for great pleasure of using this menu without cheating.
 
 ---
 
 # Installation
 
 - Download the release from [here](https://github.com/ciperuoy/Legally.Stupid/releases/latest)
-- Drag the file `iis_Stupid_Menu.dll` to your plugins folder
+- Drag the file `LegallyStupid.dll` to your plugins folder
 - Start Gorilla Tag if needed
 
-> This product is not affiliated with Gorilla Tag or Another Axiom LLC and is not endorsed or otherwise sponsored by Another Axiom LLC. Portions of the materials contained herein are property of Another Axiom LLC. © 2024 Another Axiom LLC.
+> This product is not affiliated with Another Axiom Inc. or its videogames Gorilla Tag and Orion Drift and is not endorsed or otherwise sponsored by Another Axiom. Portions of the materials contained herein are property of Another Axiom. ©2021 Another Axiom Inc.
