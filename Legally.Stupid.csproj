@@ -1,6 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<gtPath>D:\Steam Installation\steamapps\common\Gorilla Tag</gtPath>
 		<AssemblyName>ii's Stupid Menu</AssemblyName>
 		<GenerateAssemblyInfo>False</GenerateAssemblyInfo>
 		<TargetFramework>netstandard2.1</TargetFramework>
