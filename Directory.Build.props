@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project>
 	<PropertyGroup>
-		<gtPath>D:\Steam Installation\steamapps\common\Gorilla Tag</gtPath>
+		<gtPath>C:\Program Files (x86)\Steam\steamapps\common\Gorilla Tag</gtPath>
 	</PropertyGroup>
 </Project>
