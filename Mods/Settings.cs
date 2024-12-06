@@ -1,9 +1,9 @@
-﻿using GorillaNetworking;
+using GorillaNetworking;
 using HarmonyLib;
 using LegallyStupid.Classes;
 using LegallyStupid.Menu;
-using LegallyStupid.Mods.Spammers;
 using LegallyStupid.Notifications;
+using Photon.Realtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -46,7 +46,7 @@ namespace LegallyStupid.Mods
                             {
                                 for (int j = 0; j < v.transform.childCount; j++)
                                 {
-                                    Text lol = v.transform.GetChild(j).gameObject.GetComponent<Text>();
+                                    Text lol = v.transform.GetChild(j).gameObject.GetComponent<TextMeshPro>();
                                     lol.color = textColor;
                                 }
                             } else
@@ -214,53 +214,14 @@ namespace LegallyStupid.Mods
             pageNumber = 0;
         }
 
-        public static void EnableRoomSettings()
-        {
-            buttonsType = 3;
-            pageNumber = 0;
-        }
-
-        public static void EnableSafetySettings()
-        {
-            buttonsType = 28;
-            pageNumber = 0;
-        }
-
+      
         public static void EnableMovementSettings()
         {
             buttonsType = 4;
             pageNumber = 0;
         }
 
-        public static void EnableProjectileSettings()
-        {
-            buttonsType = 5;
-            pageNumber = 0;
-        }
-
-        public static void EnableSoundboardSettings()
-        {
-            buttonsType = 30;
-            pageNumber = 0;
-        }
-
-        public static void EnableRoom()
-        {
-            buttonsType = 6;
-            pageNumber = 0;
-        }
-
-        public static void EnableImportant()
-        {
-            buttonsType = 7;
-            pageNumber = 0;
-        }
-
-        public static void EnableSafety()
-        {
-            buttonsType = 8;
-            pageNumber = 0;
-        }
+     
 
         public static void EnableMovement()
         {
@@ -268,11 +229,7 @@ namespace LegallyStupid.Mods
             pageNumber = 0;
         }
 
-        public static void EnableAdvantage()
-        {
-            buttonsType = 10;
-            pageNumber = 0;
-        }
+     
 
         public static void EnableVisual()
         {
@@ -280,60 +237,8 @@ namespace LegallyStupid.Mods
             pageNumber = 0;
         }
 
-        public static void EnableFun()
-        {
-            buttonsType = 12;
-            pageNumber = 0;
-        }
-
-        public static void EnableSpam()
-        {
-            buttonsType = 13;
-            pageNumber = 0;
-        }
-
-        public static void EnableSoundSpam()
-        {
-            buttonsType = 14;
-            pageNumber = 0;
-        }
-
-        public static void EnableProjectileSpam()
-        {
-            buttonsType = 15;
-            pageNumber = 0;
-        }
-
-        public static void EnableMaster()
-        {
-            buttonsType = 16;
-            pageNumber = 0;
-        }
-
-        public static void EnableOverpowered()
-        {
-            buttonsType = 17;
-            pageNumber = 0;
-        }
-
-        public static void EnableExperimental()
-        {
-            buttonsType = 18;
-            pageNumber = 0;
-        }
-
-        public static void EnableRisky()
-        {
-            buttonsType = 26;
-            pageNumber = 0;
-        }
-
-        public static void EnableBuggy()
-        {
-            buttonsType = 27;
-            pageNumber = 0;
-        }
-
+  
+       
         public static void EnableFavorites()
         {
             buttonsType = 19;
@@ -462,7 +367,7 @@ namespace LegallyStupid.Mods
             thething.Find("Right Hand").gameObject.SetActive(false);
 
             watchText = thething.Find("Text").gameObject;
-            //watchText.GetComponent<Text>().horizontalOverflow = UnityEngine.HorizontalWrapMode.Overflow;
+            //watchText.GetComponent<TextMeshPro>().horizontalOverflow = UnityEngine.HorizontalWrapMode.Overflow;
             watchEnabledIndicator = thething.Find("Left Hand").gameObject;
             watchShell = watchobject.transform.Find("HuntWatch_ScreenLocal").gameObject;
 
@@ -1904,7 +1809,7 @@ namespace LegallyStupid.Mods
                     if (gtagfont == null)
                     {
                         GameObject fart = LoadAsset("gtag");
-                        gtagfont = fart.transform.Find("text").gameObject.GetComponent<Text>().font;
+                        gtagfont = fart.transform.Find("text").gameObject.GetComponent<TextMeshPro>().font;
                         UnityEngine.Object.Destroy(fart);
                     }
                     activeFont = gtagfont;
@@ -1976,119 +1881,9 @@ namespace LegallyStupid.Mods
             try { reference.transform.localPosition = pointerOffset; } catch { }
         }
 
-        public static void SmallGunPointer()
-        {
-            smallGunPointer = true;
-        }
+       
 
-        public static void BigGunPointer()
-        {
-            smallGunPointer = false;
-        }
-
-        public static void NoGunPointer()
-        {
-            disableGunPointer = true;
-        }
-
-        public static void YesGunPointer()
-        {
-            disableGunPointer = false;
-        }
-
-        public static void NoGunLine()
-        {
-            disableGunLine = true;
-        }
-
-        public static void YesGunLine()
-        {
-            disableGunLine = false;
-        }
-
-        public static void LegacyGunDirection()
-        {
-            legacyGunDirection = true;
-        }
-
-        public static void NewGunDirection()
-        {
-            legacyGunDirection = false;
-        }
-
-        public static void FreezePlayerInMenu()
-        {
-            if (menu != null)
-            {
-                if (closePosition == Vector3.zero)
-                {
-                    closePosition = GorillaTagger.Instance.rigidbody.transform.position;
-                } else
-                {
-                    GorillaTagger.Instance.rigidbody.transform.position = closePosition;
-                }
-                GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
-            } else
-            {
-                closePosition = Vector3.zero;
-            }
-        }
-
-        public static void FreezePlayerInMenuEnabled()
-        {
-            closePosition = GorillaTagger.Instance.rigidbody.transform.position;
-        }
-
-        public static bool currentmentalstate = false;
-        public static void FreezeRigInMenu()
-        {
-            if (menu != null)
-            {
-                if (!currentmentalstate)
-                {
-                    currentmentalstate = true;
-                    GorillaTagger.Instance.offlineVRRig.enabled = false;
-                }
-            }
-            else
-            {
-                if (currentmentalstate)
-                {
-                    currentmentalstate = false;
-                    GorillaTagger.Instance.offlineVRRig.enabled = true;
-                }
-            }
-        }
-
-        public static void ScaleMenuWithPlayer()
-        {
-            scaleWithPlayer = true;
-        }
-
-        public static void DontScaleMenuWithPlayer()
-        {
-            scaleWithPlayer = false;
-        }
-
-        public static void DisorganizeMenu()
-        {
-            if (!disorganized)
-            {
-                disorganized = true;
-                foreach (ButtonInfo[] buttonArray in Buttons.buttons)
-                {
-                    if (buttonArray.Length > 0)
-                    {
-                        for (int i = 0; i < buttonArray.Length; i++)
-                        {
-                            Buttons.buttons[0] = Buttons.buttons[0].Concat(new[] { buttonArray[i] }).ToArray();
-                        }
-
-                        Array.Clear(buttonArray, 0, buttonArray.Length);
-                    }
-                }
-            }
-        }
+      
 
         public static void AnnoyingModeOn()
         {
@@ -2510,15 +2305,6 @@ namespace LegallyStupid.Mods
                 speedboostCycle = int.Parse(data[4]) - 1;
                 Movement.ChangeSpeedBoostAmount();
                 projmode = int.Parse(data[5]) - 1;
-                Projectiles.ChangeProjectile();
-                trailmode = int.Parse(data[6]) - 1;
-                Projectiles.ChangeTrail();
-                shootCycle = int.Parse(data[7]) - 1;
-                Projectiles.ChangeShootSpeed();
-                pointerIndex = int.Parse(data[8]) - 1;
-                ChangePointerPosition();
-                tagAuraIndex = int.Parse(data[9]) - 1;
-                Advantages.ChangeTagAuraRange();
                 notificationDecayTime = int.Parse(data[10]) - 1000;
                 ChangeNotificationTime();
                 fontStyleType = int.Parse(data[11]) - 1;
@@ -2534,8 +2320,6 @@ namespace LegallyStupid.Mods
                 Settings.ChangeButtonSound();
                 buttonClickVolume = int.Parse(data[17]) - 1;
                 Settings.ChangeButtonVolume();
-                Safety.antireportrangeindex = int.Parse(data[18]) - 1;
-                Safety.ChangeAntiReportRange();
             } // Legacy, do not add
             catch { }
 
@@ -2584,15 +2368,6 @@ namespace LegallyStupid.Mods
                 speedboostCycle = int.Parse(data[4]) - 1;
                 Movement.ChangeSpeedBoostAmount();
                 projmode = int.Parse(data[5]) - 1;
-                Projectiles.ChangeProjectile();
-                trailmode = int.Parse(data[6]) - 1;
-                Projectiles.ChangeTrail();
-                shootCycle = int.Parse(data[7]) - 1;
-                Projectiles.ChangeShootSpeed();
-                pointerIndex = int.Parse(data[8]) - 1;
-                ChangePointerPosition();
-                tagAuraIndex = int.Parse(data[9]) - 1;
-                Advantages.ChangeTagAuraRange();
                 notificationDecayTime = int.Parse(data[10]) - 1000;
                 ChangeNotificationTime();
                 fontStyleType = int.Parse(data[11]) - 1;
@@ -2610,8 +2385,6 @@ namespace LegallyStupid.Mods
                 ChangeButtonVolume();
                 Safety.antireportrangeindex = int.Parse(data[18]) - 1;
                 Safety.ChangeAntiReportRange();
-                Advantages.tagRangeIndex = int.Parse(data[19]) - 1;
-                Advantages.ChangeTagReachDistance();
                 Sound.BindMode = int.Parse(data[20]) - 1;
                 Sound.SoundBindings();
                 Movement.driveInt = int.Parse(data[21]) - 1;
