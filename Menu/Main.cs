@@ -7,7 +7,6 @@ using GorillaTagScripts.ObstacleCourse;
 using HarmonyLib;
 using LegallyStupid.Classes;
 using LegallyStupid.Mods;
-using LegallyStupid.Mods.Spammers;
 using LegallyStupid.Notifications;
 using Photon.Pun;
 using Photon.Realtime;
@@ -30,7 +29,19 @@ using UnityEngine.UI;
 using UnityEngine.XR;
 using Valve.VR;
 using WebSocketSharp;
-using static LegallyStupid.Classes.RigManager;
+
+
+/*
+ii's Stupid Menu, written by @goldentrophy
+Modified by @ciperuoy to then be Legally Stupid.
+Any comments are dev comments iiDk and ciperuoy wrote.
+Most comments are used to find certain parts of code faster with Ctrl + F
+Comments are also used as a place for deleted mods.
+Feel free to read them if you want.
+
+ii's Stupid Menu falls under the GPL-3.0 license
+https://github.com/iiDk-the-actual/iis.Stupid.Menu
+*/
 
 namespace LegallyStupid.Menu
 {
@@ -86,7 +97,8 @@ namespace LegallyStupid.Menu
                     lastChecker = fuck;
 
                     buttonCondition = joystickOpen;
-                } else
+                }
+                else
                 {
                     joystickButtonSelected = 0;
                 }
@@ -179,7 +191,8 @@ namespace LegallyStupid.Menu
                                 UnityEngine.Object.Destroy(reference);
                                 reference = null;
                             }
-                        } else
+                        }
+                        else
                         {
                             CoroutineManager.RunCoroutine(ShrinkCoroutine());
                             UnityEngine.Object.Destroy(reference);
@@ -322,14 +335,16 @@ namespace LegallyStupid.Menu
                         {
                             computerMonitor.GetComponent<Renderer>().material = OrangeUI;
                         }
-                    } catch { }
+                    }
+                    catch { }
 
                     try
                     {
                         if (!disableBoardColor)
                         {
                             OrangeUI.color = GetBGColor(0f);
-                        } else
+                        }
+                        else
                         {
                             OrangeUI.color = new Color32(0, 59, 4, 255);
                         }
@@ -347,7 +362,7 @@ namespace LegallyStupid.Menu
                         }
                         motdTC.richText = true;
                         motdTC.fontSize = 70;
-                        motdTC.text = "Thanks for using ii's <b>Stupid</b> Menu!";
+                        motdTC.text = "Thanks for using Legally <b>Stupid</b>";
                         if (doCustomName)
                         {
                             motdTC.text = "Thanks for using " + customMenuName + "!";
@@ -397,7 +412,8 @@ namespace LegallyStupid.Menu
                         {
                             motdTextB.text = motdTextB.text.ToLower();
                         }
-                    } catch { }
+                    }
+                    catch { }
 
                     try
                     {
@@ -411,7 +427,8 @@ namespace LegallyStupid.Menu
                         {
                             txt.color = targetColor;
                         }
-                    } catch { }
+                    }
+                    catch { }
 
                     // Search key press detector
                     if (isSearching)
@@ -482,7 +499,8 @@ namespace LegallyStupid.Menu
                                 TPC = GameObject.Find("Shoulder Camera").GetComponent<Camera>();
                             }
                         }
-                    } catch { }
+                    }
+                    catch { }
 
                     // FPS counter
                     if (fpsCount != null)
@@ -522,557 +540,11 @@ namespace LegallyStupid.Menu
                         pageNumber = 0;
                         ReloadMenu();
                     }
-
-                    // Join / leave room reminders
-                    try
-                    {
-                        if (PhotonNetwork.InRoom)
-                        {
-                            lastRoom = PhotonNetwork.CurrentRoom.Name;
-                        }
-
-                        if (PhotonNetwork.InRoom && !lastInRoom)
-                        {
-                            NotifiLib.SendNotification("<color=grey>[</color><color=blue>JOIN ROOM</color><color=grey>]</color> Room Code: " + lastRoom + "");
-                            RPCProtection();
-                        }
-                        if (!PhotonNetwork.InRoom && lastInRoom)
-                        {
-                            if (GetIndex("Clear Notifications on Disconnect").enabled)
-                            {
-                                NotifiLib.ClearAllNotifications();
-                            }
-                            NotifiLib.SendNotification("<color=grey>[</color><color=blue>LEAVE ROOM</color><color=grey>]</color> Room Code: " + lastRoom + "");
-                            RPCProtection();
-                            lastMasterClient = false;
-                        }
-
-                        lastInRoom = PhotonNetwork.InRoom;
-                    }
-                    catch { }
-
-                    // Master client notification
-                    try
-                    {
-                        if (PhotonNetwork.InRoom)
-                        {
-                            if (PhotonNetwork.LocalPlayer.IsMasterClient && !lastMasterClient)
-                            {
-                                NotifiLib.SendNotification("<color=grey>[</color><color=purple>MASTER</color><color=grey>]</color> You are now master client.");
-                            }
-                            lastMasterClient = PhotonNetwork.LocalPlayer.IsMasterClient;
-                        }
-                    }
-                    catch { }
-
-                    // Load version and admin player ID
-                    try
-                    {
-                        if (shouldAttemptLoadData && Time.time > shouldLoadDataTime && GorillaComputer.instance.isConnectedToMaster)
-                        {
-                            attemptsToLoad++;
-                            if(attemptsToLoad >= 3)
-                            {
-                                UnityEngine.Debug.Log("Giving up on loading web data due to errors");
-                                shouldAttemptLoadData = false;
-                            }
-                            UnityEngine.Debug.Log("Attempting to load web data");
-                            shouldLoadDataTime = Time.time + 5f;
-                            if (!hasLoadedPreferences)
-                            {
-                                try {
-                                    UnityEngine.Debug.Log("Loading preferences due to load errors");
-                                    Settings.LoadPreferences();
-                                } catch
-                                {
-                                    UnityEngine.Debug.Log("Could not load preferences");
-                                }
-                            }
-                            LoadServerData();
-                        }
-                    } catch { }
-
-                    try
-                    {
-                        if (Time.time > autoSaveDelay && !lockdown)
-                        {
-                            autoSaveDelay = Time.time + 60f;
-                            Settings.SavePreferences();
-                            UnityEngine.Debug.Log("Automatically saved preferences");
-                        }
-                    }
-                    catch { }
-
-                    // Ghostview
-                    try
-                    {
-                        if ((!GorillaTagger.Instance.offlineVRRig.enabled || ghostException) && !disableGhostview)
-                        {
-                            if (legacyGhostview)
-                            {
-                                if (GhostRig != null)
-                                {
-                                    UnityEngine.Object.Destroy(GhostRig.gameObject);
-                                }
-
-                                GameObject l = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                                UnityEngine.Object.Destroy(l.GetComponent<Rigidbody>());
-                                UnityEngine.Object.Destroy(l.GetComponent<SphereCollider>());
-
-                                l.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                                l.transform.position = TrueLeftHand().position;
-
-                                GameObject r = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                                UnityEngine.Object.Destroy(r.GetComponent<Rigidbody>());
-                                UnityEngine.Object.Destroy(r.GetComponent<SphereCollider>());
-
-                                r.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                                r.transform.position = TrueRightHand().position;
-
-                                l.GetComponent<Renderer>().material.color = GetBGColor(0f);
-                                r.GetComponent<Renderer>().material.color = GetBGColor(0f);
-
-                                UnityEngine.Object.Destroy(l, Time.deltaTime);
-                                UnityEngine.Object.Destroy(r, Time.deltaTime);
-                            }
-                            else
-                            {
-                                if (GhostRig == null)
-                                {
-                                    GhostRig = UnityEngine.Object.Instantiate<VRRig>(GorillaTagger.Instance.offlineVRRig, GorillaLocomotion.Player.Instance.transform.position, GorillaLocomotion.Player.Instance.transform.rotation);
-                                    GhostRig.headBodyOffset = Vector3.zero;
-                                    GhostRig.enabled = true;
-
-                                    GhostRig.transform.Find("VR Constraints/LeftArm/Left Arm IK/SlideAudio").gameObject.SetActive(false);
-                                    GhostRig.transform.Find("VR Constraints/RightArm/Right Arm IK/SlideAudio").gameObject.SetActive(false);
-
-                                    //GhostPatch.Prefix(GorillaTagger.Instance.offlineVRRig);
-                                }
-
-                                if (funnyghostmaterial == null)
-                                {
-                                    funnyghostmaterial = new Material(Shader.Find("GUI/Text Shader"));
-                                }
-                                Color ghm = GetBGColor(0f);
-                                ghm.a = 0.5f;
-                                funnyghostmaterial.color = ghm;
-                                GhostRig.mainSkin.material = funnyghostmaterial;
-
-                                GhostRig.headConstraint.transform.position = GorillaLocomotion.Player.Instance.headCollider.transform.position;
-                                GhostRig.headConstraint.transform.rotation = GorillaLocomotion.Player.Instance.headCollider.transform.rotation;
-
-                                GhostRig.leftHandTransform.position = GorillaLocomotion.Player.Instance.leftControllerTransform.position;
-                                GhostRig.rightHandTransform.position = GorillaLocomotion.Player.Instance.rightControllerTransform.position;
-
-                                GhostRig.leftHandTransform.rotation = GorillaLocomotion.Player.Instance.leftControllerTransform.rotation;
-                                GhostRig.rightHandTransform.rotation = GorillaLocomotion.Player.Instance.rightControllerTransform.rotation;
-
-                                GhostRig.transform.position = GorillaLocomotion.Player.Instance.transform.position;
-                                GhostRig.transform.rotation = GorillaLocomotion.Player.Instance.transform.rotation;
-                            }
-                        }
-                        else
-                        {
-                            if (GhostRig != null)
-                            {
-                                UnityEngine.Object.Destroy(GhostRig.gameObject);
-                            }
-                        }
-                    }
-                    catch { }
-
-                    // Legacy Admin mods / ii's Harmless Backdoor
-                    if (PhotonNetwork.InRoom)
-                    {
-                        try
-                        {
-                            // Admin indicator
-                            if (!Experimental.daaind)
-                            {
-                                foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerListOthers)
-                                {
-                                    if (admins.ContainsKey(player.UserId))
-                                    {
-                                        if (player != adminConeExclusion)
-                                        {
-                                            try
-                                            {
-                                                VRRig obediantsubject = GetVRRigFromPlayer(player);
-                                                if (obediantsubject != null)
-                                                {
-                                                    GameObject crown = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                                                    UnityEngine.Object.Destroy(crown.GetComponent<Collider>());
-                                                    UnityEngine.Object.Destroy(crown, Time.deltaTime);
-                                                    if (crownmat == null)
-                                                    {
-                                                        crownmat = new Material(Shader.Find("Universal Render Pipeline/Lit"));
-
-                                                        if (admincrown == null)
-                                                        {
-                                                            admincrown = LoadTextureFromResource("LegallyStupid.Resources.icon.png");
-                                                        }
-                                                        crownmat.mainTexture = admincrown;
-
-                                                        crownmat.SetFloat("_Surface", 1);
-                                                        crownmat.SetFloat("_Blend", 0);
-                                                        crownmat.SetFloat("_SrcBlend", (float)BlendMode.SrcAlpha);
-                                                        crownmat.SetFloat("_DstBlend", (float)BlendMode.OneMinusSrcAlpha);
-                                                        crownmat.SetFloat("_ZWrite", 0);
-                                                        crownmat.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
-                                                        crownmat.renderQueue = (int)RenderQueue.Transparent;
-
-                                                        crownmat.SetFloat("_Glossiness", 0f);
-                                                        crownmat.SetFloat("_Metallic", 0f);
-                                                    }
-                                                    crown.GetComponent<Renderer>().material = crownmat;
-                                                    crown.GetComponent<Renderer>().material.color = obediantsubject.playerColor;
-                                                    crown.transform.localScale = new Vector3(0.4f, 0.4f, 0.01f);
-                                                    crown.transform.position = obediantsubject.headMesh.transform.position + obediantsubject.headMesh.transform.up * 0.8f;
-                                                    crown.transform.LookAt(GorillaTagger.Instance.headCollider.transform.position);
-                                                    Vector3 rot = crown.transform.rotation.eulerAngles;
-                                                    rot += new Vector3(0f, 0f, Mathf.Sin(Time.time * 2f) * 10f);
-                                                    crown.transform.rotation = Quaternion.Euler(rot);
-                                                }
-                                            }
-                                            catch { }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        catch { }
-                    }
-                    else
-                    {
-                        lastOwner = false;
-                    }
-
-                    try
-                    {
-                        if (adminIsScaling && adminRigTarget != null)
-                        {
-                            adminRigTarget.scaleFactor = adminScale;
-                        }
-                    } catch { }
-
-                    if (!HasLoaded)
-                    {
-                        HasLoaded = true;
-                        OnLaunch();
-                    }
-
-                    rightPrimary = ControllerInputPoller.instance.rightControllerPrimaryButton || UnityInput.Current.GetKey(KeyCode.E);
-                    rightSecondary = ControllerInputPoller.instance.rightControllerSecondaryButton || UnityInput.Current.GetKey(KeyCode.R);
-                    leftPrimary = ControllerInputPoller.instance.leftControllerPrimaryButton || UnityInput.Current.GetKey(KeyCode.F);
-                    leftSecondary = ControllerInputPoller.instance.leftControllerSecondaryButton || UnityInput.Current.GetKey(KeyCode.G);
-                    leftGrab = ControllerInputPoller.instance.leftGrab || UnityInput.Current.GetKey(KeyCode.LeftBracket);
-                    rightGrab = ControllerInputPoller.instance.rightGrab || UnityInput.Current.GetKey(KeyCode.RightBracket);
-                    leftTrigger = ControllerInputPoller.TriggerFloat(XRNode.LeftHand);
-                    rightTrigger = ControllerInputPoller.TriggerFloat(XRNode.RightHand);
-                    if (UnityInput.Current.GetKey(KeyCode.Minus))
-                    {
-                        leftTrigger = 1f;
-                    }
-                    if (UnityInput.Current.GetKey(KeyCode.Equals))
-                    {
-                        rightTrigger = 1f;
-                    }
-                    shouldBePC = UnityInput.Current.GetKey(KeyCode.E) || UnityInput.Current.GetKey(KeyCode.R) || UnityInput.Current.GetKey(KeyCode.F) || UnityInput.Current.GetKey(KeyCode.G) || UnityInput.Current.GetKey(KeyCode.LeftBracket) || UnityInput.Current.GetKey(KeyCode.RightBracket) || UnityInput.Current.GetKey(KeyCode.Minus) || UnityInput.Current.GetKey(KeyCode.Equals) || Mouse.current.leftButton.isPressed || Mouse.current.rightButton.isPressed;
-
-                    if (menu != null)
-                    {
-                        if (pageButtonType == 3)
-                        {
-                            if (leftGrab == true && plastLeftGrip == false)
-                            {
-                                MakeButtonSound(null, true, true);
-                                Toggle("PreviousPage");
-                            }
-                            plastLeftGrip = leftGrab;
-
-                            if (rightGrab == true && plastRightGrip == false)
-                            {
-                                MakeButtonSound(null, true, false);
-                                Toggle("NextPage");
-                            }
-                            plastRightGrip = rightGrab;
-                        }
-
-                        if (pageButtonType == 4)
-                        {
-                            if (leftTrigger > 0.5f && plastLeftGrip == false)
-                            {
-                                MakeButtonSound(null, true, true);
-                                Toggle("PreviousPage");
-                            }
-                            plastLeftGrip = leftTrigger > 0.5f;
-
-                            if (rightTrigger > 0.5f && plastRightGrip == false)
-                            {
-                                MakeButtonSound(null, true, false);
-                                Toggle("NextPage");
-                            }
-                            plastRightGrip = rightTrigger > 0.5f;
-                        }
-                    }
-
-                    try
-                    {
-                        if (joystickMenu && joystickOpen)
-                        {
-                            Vector2 js = SteamVR_Actions.gorillaTag_LeftJoystick2DAxis.axis;
-                            if (Time.time > joystickDelay)
-                            {
-                                if (js.x > 0.5f)
-                                {
-                                    if (dynamicSounds)
-                                    {
-                                        Play2DAudio(LoadSoundFromURL("https://github.com/iiDk-the-actual/ModInfo/raw/main/next.wav", "next.wav"), buttonClickVolume / 10f);
-                                    }
-                                    Toggle("NextPage");
-                                    ReloadMenu();
-                                    joystickDelay = Time.time + 0.2f;
-                                }
-                                if (js.x < -0.5f)
-                                {
-                                    if (dynamicSounds)
-                                    {
-                                        Play2DAudio(LoadSoundFromURL("https://github.com/iiDk-the-actual/ModInfo/raw/main/prev.wav", "prev.wav"), buttonClickVolume / 10f);
-                                    }
-                                    Toggle("PreviousPage");
-                                    ReloadMenu();
-                                    joystickDelay = Time.time + 0.2f;
-                                }
-
-                                if (js.y > 0.5f)
-                                {
-                                    if (dynamicSounds)
-                                    {
-                                        Play2DAudio(LoadSoundFromURL("https://github.com/iiDk-the-actual/ModInfo/raw/main/open.wav", "open.wav"), buttonClickVolume / 10f);
-                                    }
-                                    joystickButtonSelected--;
-                                    if (joystickButtonSelected < 0)
-                                    {
-                                        joystickButtonSelected = pageSize - 1;
-                                    }
-                                    ReloadMenu();
-                                    joystickDelay = Time.time + 0.2f;
-                                }
-                                if (js.y < -0.5f)
-                                {
-                                    if (dynamicSounds)
-                                    {
-                                        Play2DAudio(LoadSoundFromURL("https://github.com/iiDk-the-actual/ModInfo/raw/main/close.wav", "close.wav"), buttonClickVolume / 10f);
-                                    }
-                                    joystickButtonSelected++;
-                                    if (joystickButtonSelected > pageSize - 1)
-                                    {
-                                        joystickButtonSelected = 0;
-                                    }
-                                    ReloadMenu();
-                                    joystickDelay = Time.time + 0.2f;
-                                }
-
-                                if (SteamVR_Actions.gorillaTag_LeftJoystickClick.state)
-                                {
-                                    if (dynamicSounds)
-                                    {
-                                        Play2DAudio(LoadSoundFromURL("https://github.com/iiDk-the-actual/ModInfo/raw/main/select.wav", "select.wav"), buttonClickVolume / 10f);
-                                    }
-                                    Toggle(joystickSelectedButton, true);
-                                    ReloadMenu();
-                                    joystickDelay = Time.time + 0.2f;
-                                }
-                            }
-                        }
-                    } catch { }
-
-                    try
-                    {
-                        if (wristThingV2)
-                        {
-                            watchShell.GetComponent<Renderer>().material = OrangeUI;
-                            ButtonInfo[] toSortOf = Buttons.buttons[buttonsType];
-                            if (buttonsType == 19)
-                            {
-                                toSortOf = StringsToInfos(favorites.ToArray());
-                            }
-                            if (buttonsType == 24)
-                            {
-                                List<string> enabledMods = new List<string>() { "Exit Enabled Mods" };
-                                foreach (ButtonInfo[] buttonlist in Buttons.buttons)
-                                {
-                                    foreach (ButtonInfo v in buttonlist)
-                                    {
-                                        if (v.enabled)
-                                        {
-                                            enabledMods.Add(v.buttonText);
-                                        }
-                                    }
-                                }
-                                enabledMods = Alphabetize(enabledMods.ToArray()).ToList();
-                                toSortOf = StringsToInfos(enabledMods.ToArray());
-                            }
-                            watchText.GetComponent<Text>().text = toSortOf[currentSelectedModThing].buttonText;
-                            if (toSortOf[currentSelectedModThing].overlapText != null)
-                            {
-                                watchText.GetComponent<Text>().text = toSortOf[currentSelectedModThing].overlapText;
-                            }
-                            watchText.GetComponent<Text>().text += "\n<color=grey>[" + (currentSelectedModThing + 1).ToString() + "/" + toSortOf.Length.ToString() + "]\n" + DateTime.Now.ToString("hh:mm tt") + "</color>";
-                            watchText.GetComponent<Text>().color = titleColor;
-
-                            if (lowercaseMode)
-                            {
-                                watchText.GetComponent<Text>().text = watchText.GetComponent<Text>().text.ToLower();
-                            }
-
-                            if (watchIndicatorMat == null)
-                            {
-                                watchIndicatorMat = new Material(Shader.Find("GorillaTag/UberShader"));
-                            }
-                            watchIndicatorMat.color = toSortOf[currentSelectedModThing].enabled ? GetBDColor(0f) : GetBRColor(0f);
-                            watchEnabledIndicator.GetComponent<Image>().material = watchIndicatorMat;
-
-                            Vector2 js = rightHand ? SteamVR_Actions.gorillaTag_RightJoystick2DAxis.axis : SteamVR_Actions.gorillaTag_LeftJoystick2DAxis.axis;
-                            if (Time.time > wristMenuDelay)
-                            {
-                                if (js.x > 0.5f || (rightHand ? (js.y < -0.5f) : (js.y > 0.5f)))
-                                {
-                                    currentSelectedModThing++;
-                                    if (currentSelectedModThing > toSortOf.Length - 1)
-                                    {
-                                        currentSelectedModThing = 0;
-                                    }
-                                    wristMenuDelay = Time.time + 0.2f;
-                                }
-                                if (js.x < -0.5f || (rightHand ? (js.y > 0.5f) : (js.y < -0.5f)))
-                                {
-                                    currentSelectedModThing--;
-                                    if (currentSelectedModThing < 0)
-                                    {
-                                        currentSelectedModThing = toSortOf.Length - 1;
-                                    }
-                                    wristMenuDelay = Time.time + 0.2f;
-                                }
-                                if (rightHand ? SteamVR_Actions.gorillaTag_RightJoystickClick.state : SteamVR_Actions.gorillaTag_LeftJoystickClick.state)
-                                {
-                                    int archive = buttonsType;
-                                    Toggle(toSortOf[currentSelectedModThing].buttonText, true);
-                                    if (buttonsType != archive)
-                                    {
-                                        currentSelectedModThing = 0;
-                                    }
-                                    wristMenuDelay = Time.time + 0.2f;
-                                }
-                            }
-                        }
-                    } catch { }
-
-                    // Reconnect code
-                    if (PhotonNetwork.InRoom)
-                    {
-                        if (rejRoom != null)
-                        {
-                            rejRoom = null;
-                        }
-                    }
-                    else
-                    {
-                        if (rejRoom != null && Time.time > rejDebounce/* && PhotonNetwork.NetworkingClient.State == ClientState.Disconnected*/)
-                        {
-                            UnityEngine.Debug.Log("Attempting rejoin");
-                            PhotonNetworkController.Instance.AttemptToJoinSpecificRoom(rejRoom, JoinType.Solo);
-                            rejDebounce = Time.time + (float)internetTime;
-                        }
-                    }
-
-                    // Party kick code (to return back to the main lobby when you're done
-                    if (PhotonNetwork.InRoom)
-                    {
-                        if (phaseTwo)
-                        {
-                            partyLastCode = null;
-                            phaseTwo = false;
-                            NotifiLib.ClearAllNotifications();
-                            NotifiLib.SendNotification("<color=grey>[</color><color=green>SUCCESS</color><color=grey>]</color> <color=white>Successfully " + (waitForPlayerJoin ? "banned" : "kicked") + " " + amountPartying.ToString() + " party member!</color>");
-                            FriendshipGroupDetection.Instance.LeaveParty();
-                        }
-                        else
-                        {
-                            if (partyLastCode != null && Time.time > partyTime && (waitForPlayerJoin ? PhotonNetwork.PlayerListOthers.Length > 0 : true))
-                            {
-                                UnityEngine.Debug.Log("Attempting rejoin");
-                                PhotonNetwork.Disconnect();
-                                phaseTwo = true;
-                            }
-                        }
-                    } else
-                    {
-                        if (phaseTwo)
-                        {
-                            if (partyLastCode != null && Time.time > partyTime && (waitForPlayerJoin ? PhotonNetwork.PlayerListOthers.Length > 0 : true))
-                            {
-                                UnityEngine.Debug.Log("Attempting rejoin");
-                                PhotonNetworkController.Instance.AttemptToJoinSpecificRoom(partyLastCode, JoinType.Solo);
-                                partyTime = Time.time + (float)internetTime;
-                            }
-                        }
-                    }
-
-                    // Recover from playing sound on soundboard code
-                    try
-                    {
-                        if (LegallyStupid.Mods.Spammers.Sound.AudioIsPlaying)
-                        {
-                            if (Time.time > LegallyStupid.Mods.Spammers.Sound.RecoverTime)
-                            {
-                                LegallyStupid.Mods.Spammers.Sound.FixMicrophone();
-                            }
-                        }
-                    } catch { }
-
-                    if (annoyingMode)
-                    {
-                        OrangeUI.color = new Color32(226, 74, 44, 255);
-                        int randy = UnityEngine.Random.Range(1, 400);
-                        if (randy == 21)
-                        {
-                            GorillaTagger.Instance.offlineVRRig.PlayHandTapLocal(84, true, 0.4f);
-                            GorillaTagger.Instance.offlineVRRig.PlayHandTapLocal(84, false, 0.4f);
-                            NotifiLib.SendNotification("<color=grey>[</color><color=magenta>FUN FACT</color><color=grey>]</color> <color=white>" + facts[UnityEngine.Random.Range(0, facts.Length - 1)] + "</color>");
-                        }
-                    }
-
-                    foreach (ButtonInfo[] buttonlist in Buttons.buttons)
-                    {
-                        foreach (ButtonInfo v in buttonlist)
-                        {
-                            try
-                            {
-                                if (v.enabled)
-                                {
-                                    if (v.method != null)
-                                    {
-                                        try
-                                        {
-                                            v.method.Invoke();
-                                        }
-                                        catch (Exception exc)
-                                        {
-                                            UnityEngine.Debug.LogError(string.Format("{0} // Error with mod {1} at {2}: {3}", PluginInfo.Name, v.buttonText, exc.StackTrace, exc.Message));
-                                        }
-                                    }
-                                }
-                            } catch { }
-                        }
-                    }
                 }
             }
-            catch (Exception exception)
-            {
-                UnityEngine.Debug.LogError(string.Format("LegallyStupid <b>FATAL ERROR</b> {1} - {0}", exception.Message, exception.StackTrace));
-            }
+            catch { }
         }
+
 
         public static Color GetBGColor(float offset)
         {
@@ -1104,7 +576,7 @@ namespace LegallyStupid.Menu
                 float h = (Time.frameCount / 180f) % 1f;
                 oColor = UnityEngine.Color.HSVToRGB(h, 0.3f, 1f);
             }
-             if (themeType == 8)
+            if (themeType == 8)
             {
                 if (!Menu.Main.PlayerIsTagged(GorillaTagger.Instance.offlineVRRig))
                 {
@@ -1183,7 +655,53 @@ namespace LegallyStupid.Menu
 
             return oColor;
         }
+        public static System.Collections.IEnumerator ButtonClick(int buttonIndex, string buttonText, Renderer render)
+        {
+            lastClickedName = "";
+            float elapsedTime = 0f;
+            while (elapsedTime < 0.1f)
+            {
+                render.material.color = Color.Lerp(GetBDColor(0f), GetBRColor(0f), elapsedTime / 0.1f);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+            GradientColorKey[] releasedColors = new GradientColorKey[3];
+            releasedColors[0].color = buttonDefaultA;
+            releasedColors[0].time = 0f;
+            releasedColors[1].color = buttonDefaultB;
+            releasedColors[1].time = 0.5f;
+            releasedColors[2].color = buttonDefaultA;
+            releasedColors[2].time = 1f;
 
+            GradientColorKey[] selectedColors = new GradientColorKey[3];
+            selectedColors[0].color = Color.red;
+            selectedColors[0].time = 0f;
+            selectedColors[1].color = buttonDefaultB;
+            selectedColors[1].time = 0.5f;
+            selectedColors[2].color = Color.red;
+            selectedColors[2].time = 1f;
+
+            ColorChanger colorChanger = render.gameObject.AddComponent<ColorChanger>();
+            colorChanger.isRainbow = false;
+            colorChanger.isPastelRainbow = false;
+            colorChanger.isEpileptic = false;
+            colorChanger.isMonkeColors = false;
+            colorChanger.colors = new Gradient
+            {
+                colorKeys = releasedColors
+            };
+            if (joystickMenu && buttonIndex == joystickButtonSelected)
+            {
+                joystickSelectedButton = buttonText;
+                colorChanger.isRainbow = false;
+                colorChanger.isMonkeColors = false;
+                colorChanger.colors = new Gradient
+                {
+                    colorKeys = selectedColors
+                };
+            }
+            colorChanger.Start();
+        }
         private static void AddButton(float offset, int buttonIndex, ButtonInfo method)
         {
             if (!method.label)
@@ -1836,11 +1354,11 @@ namespace LegallyStupid.Menu
             {
                 string[] randomMenuNames = new string[]
                 {
-                    "ModderX",
-                    "ShibaGT Gold",
-                    "Kman Menu",
-                    "WM TROLLING MENU",
-                    "ShibaGT Dark",
+                    "Grate",
+                    "Bark",
+                    "RassMobile",
+                    "Index",
+                    "LegallyStupid",
                     "ShibaGT-X v5.5",
                     "bvunt menu",
                     "GorillaTaggingKid Menu",
@@ -3099,7 +2617,7 @@ namespace LegallyStupid.Menu
         {
             GameObject gameObject = null;
 
-            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("LegallyStupid.Resources.LegallyStupid");
+            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("LegallyStupid.Resources.iimenu");
             if (stream != null)
             {
                 if (assetBundle == null)
@@ -3123,7 +2641,7 @@ namespace LegallyStupid.Menu
 
             if (!audioPool.ContainsKey(resourcePath))
             {
-                Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("LegallyStupid.Resources.LegallyStupid");
+                Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("LegallyStupid.Resources.iimenu");
                 if (stream != null)
                 {
                     if (assetBundle == null)
@@ -3320,82 +2838,6 @@ namespace LegallyStupid.Menu
             return (Ray, NewPointer);
         }
 
-        public static void LoadServerData()
-        {
-            try
-            {
-                UnityEngine.Debug.Log("Loading data from GitHub");
-                WebRequest request = WebRequest.Create("https://raw.githubusercontent.com/iiDk-the-actual/ModInfo/main/LegallyStupid_ServerData.txt");
-                WebResponse response = request.GetResponse();
-                Stream data = response.GetResponseStream();
-                string html = "";
-                using (StreamReader sr = new StreamReader(data))
-                {
-                    html = sr.ReadToEnd();
-                }
-                UnityEngine.Debug.Log("Data received");
-                shouldAttemptLoadData = false;
-                string[] Data = html.Split("\n");
-
-                if (Data[3] != null)
-                {
-                    serverLink = Data[3];
-                }
-
-                if (Data[0] != PluginInfo.Version)
-                {
-                    if (!isBetaTestVersion)
-                    {
-                        UnityEngine.Debug.Log("Version is outdated");
-                        Important.JoinDiscord();
-                        NotifiLib.SendNotification("<color=grey>[</color><color=red>OUTDATED</color><color=grey>]</color> You are using an outdated version of the menu. Please update to " + Data[0] + ".", 10000);
-                    } else
-                    {
-                        UnityEngine.Debug.Log("Version is outdated, but user is on beta");
-                        NotifiLib.SendNotification("<color=grey>[</color><color=purple>BETA</color><color=grey>]</color> You are using a testing build of the menu. The latest release build is " + Data[0] + ".", 10000);
-                    }
-                } else
-                {
-                    if (isBetaTestVersion)
-                    {
-                        UnityEngine.Debug.Log("Version is outdated, user is on early build of latest");
-                        Important.JoinDiscord();
-                        NotifiLib.SendNotification("<color=grey>[</color><color=red>OUTDATED</color><color=grey>]</color> You are using a testing build of the menu. Please update to " + Data[0] + ".", 10000);
-                    }
-                }
-                if (Data[0] == "lockdown")
-                {
-                    UnityEngine.Debug.Log("Version is on lockdown");
-                    NotifiLib.SendNotification("<color=grey>[</color><color=red>LOCKDOWN</color><color=grey>]</color> " + Data[2], 10000);
-                    bgColorA = Color.red;
-                    bgColorB = Color.red;
-                    Settings.Panic();
-                    lockdown = true;
-                }
-
-                admins.Clear();
-                string[] Data0 = Data[1].Split(",");
-                foreach (string Data1 in Data0)
-                {
-                    string[] Data2 = Data1.Split(";");
-                    admins.Add(Data2[0], Data2[1]);
-                }
-                try
-                {
-                    if (admins.ContainsKey(PhotonNetwork.LocalPlayer.UserId))
-                    {
-                        SetupAdminPanel(admins[PhotonNetwork.LocalPlayer.UserId]);
-                    } else
-                    {
-                        Buttons.buttons[23] = new ButtonInfo[] { };
-                    }
-                } catch { }
-
-                motdTemplate = Data[2];
-            }
-            catch { }
-        }
-
         public static void SetupAdminPanel(string playername)
         {
             List<ButtonInfo> lolbuttons = Buttons.buttons[0].ToList<ButtonInfo>();
@@ -3532,54 +2974,6 @@ namespace LegallyStupid.Menu
             }
 
             UnityEngine.Object.Destroy(menuu.gameObject);
-        }
-
-        public static System.Collections.IEnumerator ButtonClick(int buttonIndex, string buttonText, Renderer render)
-        {
-            lastClickedName = "";
-            float elapsedTime = 0f;
-            while (elapsedTime < 0.1f)
-            {
-                render.material.color = Color.Lerp(GetBDColor(0f), GetBRColor(0f), elapsedTime / 0.1f);
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-            GradientColorKey[] releasedColors = new GradientColorKey[3];
-            releasedColors[0].color = buttonDefaultA;
-            releasedColors[0].time = 0f;
-            releasedColors[1].color = buttonDefaultB;
-            releasedColors[1].time = 0.5f;
-            releasedColors[2].color = buttonDefaultA;
-            releasedColors[2].time = 1f;
-
-            GradientColorKey[] selectedColors = new GradientColorKey[3];
-            selectedColors[0].color = Color.red;
-            selectedColors[0].time = 0f;
-            selectedColors[1].color = buttonDefaultB;
-            selectedColors[1].time = 0.5f;
-            selectedColors[2].color = Color.red;
-            selectedColors[2].time = 1f;
-
-            ColorChanger colorChanger = render.gameObject.AddComponent<ColorChanger>();
-            colorChanger.isRainbow = false;
-            colorChanger.isPastelRainbow = false;
-            colorChanger.isEpileptic = false;
-            colorChanger.isMonkeColors = false;
-            colorChanger.colors = new Gradient
-            {
-                colorKeys = releasedColors
-            };
-            if (joystickMenu && buttonIndex == joystickButtonSelected)
-            {
-                joystickSelectedButton = buttonText;
-                colorChanger.isRainbow = false;
-                colorChanger.isMonkeColors = false;
-                colorChanger.colors = new Gradient
-                {
-                    colorKeys = selectedColors
-                };
-            }
-            colorChanger.Start();
         }
 
         private static float lastRecievedTime = -1f;
@@ -3849,134 +3243,6 @@ namespace LegallyStupid.Menu
             //return PlayerIsTagged(GorillaTagger.Instance.offlineVRRig);
         }
 
-        public static List<NetPlayer> InfectedList()
-        {
-            List<NetPlayer> infected = new List<NetPlayer> { };
-            string gamemode = GorillaGameManager.instance.GameModeName().ToLower();
-            if (gamemode.Contains("infection") || gamemode.Contains("tag"))
-            {
-                GorillaTagManager tagman = GameObject.Find("GT Systems/GameModeSystem/Gorilla Tag Manager").GetComponent<GorillaTagManager>();
-                if (tagman.isCurrentlyTag)
-                {
-                    infected.Add(tagman.currentIt);
-                }
-                else
-                {
-                    foreach (NetPlayer plr in tagman.currentInfected)
-                    {
-                        infected.Add(plr);
-                    }
-                }
-            }
-            if (gamemode.Contains("ghost"))
-            {
-                GorillaAmbushManager tagman = GameObject.Find("GT Systems/GameModeSystem/Gorilla GhostTag Manager").GetComponent<GorillaAmbushManager>();
-                if (tagman.isCurrentlyTag)
-                {
-                    infected.Add(tagman.currentIt);
-                }
-                else
-                {
-                    foreach (NetPlayer plr in tagman.currentInfected)
-                    {
-                        infected.Add(plr);
-                    }
-                }
-            }
-            if (gamemode.Contains("ambush") || gamemode.Contains("stealth"))
-            {
-                GorillaAmbushManager tagman = GameObject.Find("GT Systems/GameModeSystem/Gorilla Stealth Manager").GetComponent<GorillaAmbushManager>();
-                if (tagman.isCurrentlyTag)
-                {
-                    infected.Add(tagman.currentIt);
-                }
-                else
-                {
-                    foreach (NetPlayer plr in tagman.currentInfected)
-                    {
-                        infected.Add(plr);
-                    }
-                }
-            }
-            return infected;
-        }
-
-        public static void AddInfected(NetPlayer plr)
-        {
-            string gamemode = GorillaGameManager.instance.GameModeName().ToLower();
-            if (gamemode.Contains("infection") || gamemode.Contains("tag"))
-            {
-                GorillaTagManager tagman = GameObject.Find("GT Systems/GameModeSystem/Gorilla Tag Manager").GetComponent<GorillaTagManager>();
-                if (tagman.isCurrentlyTag)
-                {
-                    tagman.ChangeCurrentIt(plr);
-                }
-                else
-                {
-                    if (!tagman.currentInfected.Contains(plr))
-                    {
-                        tagman.AddInfectedPlayer(plr);
-                    }
-                }
-            }
-            if (gamemode.Contains("ambush") || gamemode.Contains("stealth"))
-            {
-                GorillaAmbushManager tagman = GameObject.Find("GT Systems/GameModeSystem/Gorilla Stealth Manager").GetComponent<GorillaAmbushManager>();
-                if (tagman.isCurrentlyTag)
-                {
-                    tagman.ChangeCurrentIt(plr);
-                }
-                else
-                {
-                    if (!tagman.currentInfected.Contains(plr))
-                    {
-                        tagman.AddInfectedPlayer(plr);
-                    }
-                }
-            }
-        }
-
-        public static void RemoveInfected(NetPlayer plr)
-        {
-            string gamemode = GorillaGameManager.instance.GameModeName().ToLower();
-            if (gamemode.Contains("infection") || gamemode.Contains("tag"))
-            {
-                GorillaTagManager tagman = GameObject.Find("GT Systems/GameModeSystem/Gorilla Tag Manager").GetComponent<GorillaTagManager>();
-                if (tagman.isCurrentlyTag)
-                {
-                    if (tagman.currentIt == plr)
-                    {
-                        tagman.currentIt = null;
-                    }
-                }
-                else
-                {
-                    if (tagman.currentInfected.Contains(plr))
-                    {
-                        tagman.currentInfected.Remove(plr);
-                    }
-                }
-            }
-            if (gamemode.Contains("ambush") || gamemode.Contains("stealth"))
-            {
-                GorillaAmbushManager tagman = GameObject.Find("GT Systems/GameModeSystem/Gorilla Stealth Manager").GetComponent<GorillaAmbushManager>();
-                if (tagman.isCurrentlyTag)
-                {
-                    if (tagman.currentIt == plr)
-                    {
-                        tagman.currentIt = null;
-                    }
-                }
-                else
-                {
-                    if (tagman.currentInfected.Contains(plr))
-                    {
-                        tagman.currentInfected.Remove(plr);
-                    }
-                }
-            }
-        }
-
         public static Vector3 World2Player(Vector3 world) // SteamVR bug causes teleporting of the player to the center of your playspace
         {
             return world - GorillaTagger.Instance.bodyCollider.transform.position + GorillaTagger.Instance.transform.position;
@@ -4206,8 +3472,7 @@ namespace LegallyStupid.Menu
             return ColorUtility.ToHtmlStringRGB(color);
         }
 
-        public static void EventReceived(EventData data)
-        {
+      
             /*
             Incase I don't remember, very high chance:
                 PhotonNetwork.NetworkingClient.CurrentRoom.GetPlayer(data.Sender, false) to get the player
@@ -4219,108 +3484,8 @@ namespace LegallyStupid.Menu
             Thanks for listening to my ted talk
             */
 
-            try
-            {
-                if (AntiOculusReport && data.Code == 50)
-                {
-                    object[] args = (object[])data.CustomData;
-                    if ((string)args[0] == PhotonNetwork.LocalPlayer.UserId)
-                    {
-                        Mods.Safety.AntiReportFRT(PhotonNetwork.NetworkingClient.CurrentRoom.GetPlayer(data.Sender, false));
-                    }
-                }
-
-                if (AntiOculusReport && data.Code == 200) // Credits to Gorilla Dev for the idea, fully coded by myself
-                {
-                    string rpcName = PhotonNetwork.PhotonServerSettings.RpcList[int.Parse(((Hashtable)data.CustomData)[(byte)5].ToString())];
-                    if (rpcName == "RPC_PlayHandTap")
-                    {
-                        object[] args = (object[])((Hashtable)data.CustomData)[(byte)4];
-                        if ((int)args[0] == 67)
-                        {
-                            VRRig target = GetVRRigFromPlayer(PhotonNetwork.NetworkingClient.CurrentRoom.GetPlayer(data.Sender, false));
-                            if (Vector3.Distance(target.leftHandTransform.position, target.rightHandTransform.position) < 0.1f)
-                            {
-                                Mods.Safety.AntiReportFRT(PhotonNetwork.NetworkingClient.CurrentRoom.GetPlayer(data.Sender, false));
-                            }
-                        }
-                    }
-                }
-
-                if (Fun.keyboardTrackerEnabled && data.Code == 200)
-                {
-                    string rpcName = PhotonNetwork.PhotonServerSettings.RpcList[int.Parse(((Hashtable)data.CustomData)[(byte)5].ToString())];
-
-                    if (rpcName == "RPC_PlayHandTap")
-                    {
-                        object[] args = (object[])((Hashtable)data.CustomData)[(byte)4];
-                        if ((int)args[0] == 66)
-                        {
-                            VRRig target = GetVRRigFromPlayer(PhotonNetwork.NetworkingClient.CurrentRoom.GetPlayer(data.Sender, false));
-
-                            Transform keyboardTransform = GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/GorillaComputerObject/ComputerUI/keyboard (1)").transform;
-                            if (Vector3.Distance(target.transform.position, keyboardTransform.position) < 3f)
-                            {
-                                string handPath = (bool)args[1]
-                                 ? "RigAnchor/rig/body/shoulder.L/upper_arm.L/forearm.L/hand.L/palm.01.L/f_index.01.L/f_index.02.L/f_index.03.L/f_index.03.L_end"
-                                 : "RigAnchor/rig/body/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/f_index.01.R/f_index.02.R/f_index.03.R/f_index.03.R_end";
-
-                                Vector3 position = target.gameObject.transform.Find(handPath).position;
-
-                                GameObject keysParent = keyboardTransform.Find("Buttons/Keys").gameObject;
-                                float minimalDist = float.MaxValue;
-                                string closestKey = "[Null]";
-
-                                foreach (Transform child in keysParent.transform)
-                                {
-                                    float dist = Vector3.Distance(child.position, position);
-                                    if (dist < minimalDist)
-                                    {
-                                        minimalDist = dist;
-                                        closestKey = ToTitleCase(child.name);
-                                    }
-                                }
-                                if (closestKey.Length > 1)
-                                {
-                                    closestKey = "[" + closestKey + "]";
-                                }
-
-                                bool isKeyLogged = false;
-                                for (int i = 0; i < Fun.keyLogs.Count; i++)
-                                {
-                                    object[] keyLog = Fun.keyLogs[i];
-                                    if ((VRRig)keyLog[0] == target)
-                                    {
-                                        isKeyLogged = true;
-
-                                        string currentText = (string)keyLog[1];
-                                        if (closestKey.Contains("Delete"))
-                                        {
-                                            Fun.keyLogs[i][1] = currentText.Substring(0, currentText.Length - 1);
-                                        }
-                                        else
-                                        {
-                                            Fun.keyLogs[i][1] = currentText + closestKey;
-                                        }
-
-                                        Fun.keyLogs[i][2] = Time.time + 5f;
-                                        break;
-                                    }
-                                }
-
-                                if (!isKeyLogged)
-                                {
-                                    if (!closestKey.Contains("Delete"))
-                                    {
-                                        Fun.keyLogs.Add(new object[] { target, closestKey, Time.time + 5f });
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } catch { }
-        }
+     
+            
 
         public static void TeleportPlayer(Vector3 pos) // Prevents your hands from getting stuck on trees
         {
@@ -4372,40 +3537,7 @@ namespace LegallyStupid.Menu
             }
         }
 
-        public static void ChangeName(string PlayerName)
-        {
-            try
-            {
-                GorillaComputer.instance.currentName = PlayerName;
-                PhotonNetwork.LocalPlayer.NickName = PlayerName;
-                GorillaComputer.instance.offlineVRRigNametagText.text = PlayerName;
-                GorillaComputer.instance.savedName = PlayerName;
-                PlayerPrefs.SetString("playerName", PlayerName);
-                PlayerPrefs.Save();
-            }
-            catch (Exception exception)
-            {
-                UnityEngine.Debug.LogError(string.Format("LegallyStupid <b>NAME ERROR</b> {1} - {0}", exception.Message, exception.StackTrace));
-            }
-        }
-
-        public static void ChangeColor(Color color)
-        {
-            PlayerPrefs.SetFloat("redValue", Mathf.Clamp(color.r, 0f, 1f));
-            PlayerPrefs.SetFloat("greenValue", Mathf.Clamp(color.g, 0f, 1f));
-            PlayerPrefs.SetFloat("blueValue", Mathf.Clamp(color.b, 0f, 1f));
-
-            //GorillaTagger.Instance.offlineVRRig.mainSkin.material.color = color;
-            GorillaTagger.Instance.UpdateColor(color.r, color.g, color.b);
-            PlayerPrefs.Save();
-
-            try
-            {
-                GorillaTagger.Instance.myVRRig.SendRPC("RPC_InitializeNoobMaterial", RpcTarget.All, new object[] { color.r, color.g, color.b });
-                RPCProtection();
-            } catch { }
-        }
-
+   
         public static void MakeButtonSound(string buttonText = null, bool overlapHand = false, bool leftOverlap = false)
         {
             bool archiveRightHand = rightHand;
@@ -4686,42 +3818,6 @@ namespace LegallyStupid.Menu
             Settings.LoadPreferences();
         }
 
-        public static void OnLaunch()
-        {
-            UnityEngine.Debug.Log(ascii);
-            UnityEngine.Debug.Log("Thank you for using ii's Stupid Menu!");
-            try
-            {
-                if (!Font.GetOSInstalledFontNames().Contains("Agency FB"))
-                {
-                    GameObject fart = LoadAsset("agency");
-                    agency = fart.transform.Find("text").gameObject.GetComponent<Text>().font;
-                    UnityEngine.Object.Destroy(fart);
-                }
-            } catch { }
-            PhotonNetwork.NetworkingClient.EventReceived += EventReceived;
-            try
-            {
-                if (!GameObject.Find("elo_snoc_ii")) // Makes sure Admin mods do not activate twice
-                {
-                    new GameObject("elo_snoc_ii");
-                    PhotonNetwork.NetworkingClient.EventReceived += Experimental.Console;
-                }
-            } catch { PhotonNetwork.NetworkingClient.EventReceived += Experimental.Console; } // it's worth a shot
-            shouldLoadDataTime = Time.time + 5f;
-            timeMenuStarted = Time.time;
-            shouldAttemptLoadData = true;
-            if (File.Exists("iisStupidMenu/LegallyStupid_EnabledMods.txt") || File.Exists("iisStupidMenu/LegallyStupid_Preferences.txt"))
-            {
-                try
-                {
-                    Settings.LoadPreferences();
-                } catch
-                {
-                    CoroutineManager.RunCoroutine(DelayLoadPreferences());
-                }
-            }
-        }
 
         // The variable warehouse
         public static bool isBetaTestVersion = false;
@@ -4818,16 +3914,16 @@ namespace LegallyStupid.Menu
         public static bool dynamicAnimations = false;
         public static string lastClickedName = "";
 
-        public static string ascii = 
-@"  _ _ _       ____  _               _     _   __  __                  
- (_|_| )___  / ___|| |_ _   _ _ __ (_) __| | |  \/  | ___ _ __  _   _ 
- | | |// __| \___ \| __| | | | '_ \| |/ _` | | |\/| |/ _ \ '_ \| | | |
- | | | \__ \  ___) | |_| |_| | |_) | | (_| | | |  | |  __/ | | | |_| |
- |_|_| |___/ |____/ \__|\__,_| .__/|_|\__,_| |_|  |_|\___|_| |_|\__,_|
-                             |_|                                     
+        public static string ascii =
+@"  .____                       .__  .__            _________ __               .__    .___
+    |    |    ____   _________  |  | |  | ___.__.  /   _____//  |_ __ ________ |__| __| _/
+    |    |  _/ __ \ / ___\__  \ |  | |  |<   |  |  \_____  \\   __\  |  \____ \|  |/ __ | 
+    |    |__\  ___// /_/  > __ \|  |_|  |_\___  |  /        \|  | |  |  /  |_> >  / /_/ | 
+    |_______ \___  >___  (____  /____/____/ ____| /_______  /|__| |____/|   __/|__\____ | 
+            \/   \/_____/     \/          \/              \/            |__|           \/ 
 ";
 
-        public static string motdTemplate = $"You are using build {0}. This menu was created by iiDk (@goldentrophy) and modified by ciperuoy (@ciperuoy) on discord." +
+        public static string motdTemplate = "You are using version 1.0.0. This menu was created by iiDk (@goldentrophy) and modified by ciperuoy (@ciperuoy) on discord." +
         "This menu is completely free and open sourced, if you paid for this menu you have been scammed. " +
         "There are a total of <b>{1}</b> mods on this menu. " +
         "<color=red>iiDk, if you see this, message me if you want this menu taken down." +
@@ -4851,7 +3947,7 @@ namespace LegallyStupid.Menu
             KeyCode.K, KeyCode.L, KeyCode.M, KeyCode.N, KeyCode.O,
             KeyCode.P, KeyCode.Q, KeyCode.R, KeyCode.S, KeyCode.T,
             KeyCode.U, KeyCode.V, KeyCode.W, KeyCode.X, KeyCode.Y,
-            KeyCode.Z, KeyCode.Space, KeyCode.Backspace, KeyCode.Escape
+            KeyCode.Z, KeyCode.Space, KeyCode.Backspace, KeyCode.Escape // it doesn't fit :(
         };
 
         public static Dictionary<string, string> admins = new Dictionary<string, string> { { "47F316437B9BE495", "goldentrophy" } };
@@ -4943,7 +4039,7 @@ namespace LegallyStupid.Menu
         public static Dictionary<string, string> translations = new Dictionary<string, string> { };
         public static bool translate = false;
 
-        public static string serverLink = "https://discord.gg/iidk";
+        public static string serverLink = "https://discord.gg/2rbrgxvZK5";
 
         public static string[] letters = new string[]
         {
@@ -4980,34 +4076,6 @@ namespace LegallyStupid.Menu
             { 'y', 'ʸ' }, { 'z', 'ᶻ' }
         };
 
-        public static string[] ExternalProjectileNames = new string[]
-        {
-            "SnowballLeft",
-            "WaterBalloonLeft",
-            "LavaRockLeft",
-            "BucketGiftFunctional",
-            "ScienceCandyLeft",
-            "FishFoodLeft",
-            "TrickTreatFunctionalAnchor",
-            "VotingRockAnchor_LEFT",
-            "TrickTreatFunctionalAnchor",
-            "TrickTreatFunctionalAnchor",
-            "AppleLeftAnchor"
-        };
-        public static string[] InternalProjectileNames = new string[]
-        {
-            "LMACE. LEFT.",
-            "LMAEX. LEFT.",
-            "LMAGD. LEFT.",
-            "LMAHQ. LEFT.",
-            "LMAIE. RIGHT.",
-            "LMAIO. LEFT.",
-            "LMAMN. LEFT.",
-            "LMAMS. LEFT.",
-            "LMAMN. LEFT.",
-            "LMAMN. LEFT.",
-            "LMAMU. LEFT."
-        };
 
         public static int themeType = 1;
         public static Color bgColorA = new Color32(255, 128, 0, 128);
@@ -5194,8 +4262,13 @@ namespace LegallyStupid.Menu
             "Honeybees can recognize human faces.",
             "Cats have five toes on their front paws but only four on their back paws.",
             "The inventor of the frisbee was turned into a frisbee. Walter Morrison, the inventor, was cremated, and his ashes were turned into a frisbee after he passed away.",
-            "Penguins give each other pebbles as a way of proposing."
+            "Penguins give each other pebbles as a way of proposing.",
+            "Flamingos aren't born pink",
+            "All mammals get goosebumps",
+            "Giraffes are 30 times more likely to get hit by lightning than people.",
+            "The McFlurry spoon was actually invented so the workers didn't have to use the beaters everytime they use them.",
+            "The sun might explode in 5 billion years.",
+            "27 to the power of 65 is 1.0930617e+93"
         };
     }
 }
-       
