@@ -20,7 +20,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.XR.Interaction.Toolkit;
 using Valve.VR;
-using static LegallyStupid.Classes.RigManager;
 using static LegallyStupid.Menu.Main;
 
 namespace LegallyStupid.Mods
@@ -231,38 +230,9 @@ namespace LegallyStupid.Mods
                     var leftHandTransform = TrueLeftHand();
                     leftplat.transform.position = leftHandTransform.position;
                     leftplat.transform.rotation = leftHandTransform.rotation;
-                    if (GetIndex("Stick Long Arms").enabled)
-                    {
-                        leftplat.transform.position += GorillaTagger.Instance.leftHandTransform.forward * (armlength - 0.917f);
-                    }
-                    if (GetIndex("Multiplied Long Arms").enabled)
-                    {
-                        Vector3 legacyPosL = GorillaLocomotion.Player.Instance.leftControllerTransform.transform.position;
-                        Vector3 legacyPosR = GorillaLocomotion.Player.Instance.rightControllerTransform.transform.position;
-                        MultipliedLongArms();
-                        leftplat.transform.position = TrueLeftHand().position;
-                        GorillaLocomotion.Player.Instance.leftControllerTransform.transform.position = legacyPosL;
-                        GorillaLocomotion.Player.Instance.rightControllerTransform.transform.position = legacyPosR;
-                    }
-                    if (GetIndex("Vertical Long Arms").enabled)
-                    {
-                        Vector3 legacyPosL = GorillaLocomotion.Player.Instance.leftControllerTransform.transform.position;
-                        Vector3 legacyPosR = GorillaLocomotion.Player.Instance.rightControllerTransform.transform.position;
-                        VerticalLongArms();
-                        leftplat.transform.position = TrueLeftHand().position;
-                        GorillaLocomotion.Player.Instance.leftControllerTransform.transform.position = legacyPosL;
-                        GorillaLocomotion.Player.Instance.rightControllerTransform.transform.position = legacyPosR;
-                    }
-                    if (GetIndex("Horizontal Long Arms").enabled)
-                    {
-                        Vector3 legacyPosL = GorillaLocomotion.Player.Instance.leftControllerTransform.transform.position;
-                        Vector3 legacyPosR = GorillaLocomotion.Player.Instance.rightControllerTransform.transform.position;
-                        HorizontalLongArms();
-                        leftplat.transform.position = TrueLeftHand().position;
-                        GorillaLocomotion.Player.Instance.leftControllerTransform.transform.position = legacyPosL;
-                        GorillaLocomotion.Player.Instance.rightControllerTransform.transform.position = legacyPosR;
-                    }
                 }
+
+
                 else
                 {
                     if (platformMode != 5)
@@ -279,108 +249,78 @@ namespace LegallyStupid.Mods
                         leftplat.GetComponent<Renderer>().material.color = new Color32((byte)UnityEngine.Random.Range(0, 255), (byte)UnityEngine.Random.Range(0, 255), (byte)UnityEngine.Random.Range(0, 255), 128);
                     }
                 }
-            }
-            else
-            {
-                if (leftplat != null)
+                }
+                else
                 {
-                    if (GetIndex("Platform Gravity").enabled)
+                    if (leftplat != null)
                     {
-                        leftplat.AddComponent(typeof(Rigidbody));
-                        UnityEngine.Object.Destroy(leftplat.GetComponent<Collider>());
-                        UnityEngine.Object.Destroy(leftplat, 2f);
-                    }
-                    else
-                    {
-                        UnityEngine.Object.Destroy(leftplat);
-                    }
-                    leftplat = null;
-                    if (platformMode == 4 && rightplat == null)
-                    {
-                        UpdateClipColliders(true);
+                        if (GetIndex("Platform Gravity").enabled)
+                        {
+                            leftplat.AddComponent(typeof(Rigidbody));
+                            UnityEngine.Object.Destroy(leftplat.GetComponent<Collider>());
+                            UnityEngine.Object.Destroy(leftplat, 2f);
+                        }
+                        else
+                        {
+                            UnityEngine.Object.Destroy(leftplat);
+                        }
+                        leftplat = null;
+                        if (platformMode == 4 && rightplat == null)
+                        {
+                            UpdateClipColliders(true);
+                        }
                     }
                 }
-            }
 
-            if (rightGrab)
-            {
-                if (rightplat == null)
+                if (rightGrab)
                 {
-                    rightplat = CreatePlatform();
-                    var rightHandTransform = TrueRightHand();
-                    rightplat.transform.position = rightHandTransform.position;
-                    rightplat.transform.rotation = rightHandTransform.rotation;
-                    if (GetIndex("Stick Long Arms").enabled)
+                    if (rightplat == null)
                     {
-                        rightplat.transform.position += GorillaTagger.Instance.rightHandTransform.forward * (armlength - 0.917f);
+                        rightplat = CreatePlatform();
+                        var rightHandTransform = TrueRightHand();
+                        rightplat.transform.position = rightHandTransform.position;
+                        rightplat.transform.rotation = rightHandTransform.rotation;
                     }
-                    if (GetIndex("Multiplied Long Arms").enabled)
+
+                    else
                     {
-                        Vector3 legacyPosL = GorillaLocomotion.Player.Instance.leftControllerTransform.transform.position;
-                        Vector3 legacyPosR = GorillaLocomotion.Player.Instance.rightControllerTransform.transform.position;
-                        MultipliedLongArms();
-                        rightplat.transform.position = TrueRightHand().position;
-                        GorillaLocomotion.Player.Instance.leftControllerTransform.transform.position = legacyPosL;
-                        GorillaLocomotion.Player.Instance.rightControllerTransform.transform.position = legacyPosR;
-                    }
-                    if (GetIndex("Vertical Long Arms").enabled)
-                    {
-                        Vector3 legacyPosL = GorillaLocomotion.Player.Instance.leftControllerTransform.transform.position;
-                        Vector3 legacyPosR = GorillaLocomotion.Player.Instance.rightControllerTransform.transform.position;
-                        VerticalLongArms();
-                        rightplat.transform.position = TrueRightHand().position;
-                        GorillaLocomotion.Player.Instance.leftControllerTransform.transform.position = legacyPosL;
-                        GorillaLocomotion.Player.Instance.rightControllerTransform.transform.position = legacyPosR;
-                    }
-                    if (GetIndex("Horizontal Long Arms").enabled)
-                    {
-                        Vector3 legacyPosL = GorillaLocomotion.Player.Instance.leftControllerTransform.transform.position;
-                        Vector3 legacyPosR = GorillaLocomotion.Player.Instance.rightControllerTransform.transform.position;
-                        HorizontalLongArms();
-                        rightplat.transform.position = TrueRightHand().position;
-                        GorillaLocomotion.Player.Instance.leftControllerTransform.transform.position = legacyPosL;
-                        GorillaLocomotion.Player.Instance.rightControllerTransform.transform.position = legacyPosR;
+                        if (platformMode != 5)
+                        {
+                            rightplat.GetComponent<Renderer>().material.color = GetBGColor(0f);
+                        }
+                        if (platformMode == 2)
+                        {
+                            float h = (Time.frameCount / 180f) % 1f;
+                            rightplat.GetComponent<Renderer>().material.color = UnityEngine.Color.HSVToRGB(h, 1f, 1f);
+                        }
+                        if (platformMode == 3)
+                        {
+                            rightplat.GetComponent<Renderer>().material.color = new Color32((byte)UnityEngine.Random.Range(0, 255), (byte)UnityEngine.Random.Range(0, 255), (byte)UnityEngine.Random.Range(0, 255), 128);
+                        }
                     }
                 }
                 else
                 {
-                    if (platformMode != 5)
+                    if (rightplat != null)
                     {
-                        rightplat.GetComponent<Renderer>().material.color = GetBGColor(0f);
-                    }
-                    if (platformMode == 2)
-                    {
-                        float h = (Time.frameCount / 180f) % 1f;
-                        rightplat.GetComponent<Renderer>().material.color = UnityEngine.Color.HSVToRGB(h, 1f, 1f);
-                    }
-                    if (platformMode == 3)
-                    {
-                        rightplat.GetComponent<Renderer>().material.color = new Color32((byte)UnityEngine.Random.Range(0, 255), (byte)UnityEngine.Random.Range(0, 255), (byte)UnityEngine.Random.Range(0, 255), 128);
-                    }
-                }
-            }
-            else
-            {
-                if (rightplat != null)
-                {
-                    if (GetIndex("Platform Gravity").enabled)
-                    {
-                        rightplat.AddComponent(typeof(Rigidbody));
-                        UnityEngine.Object.Destroy(rightplat.GetComponent<Collider>());
-                        UnityEngine.Object.Destroy(rightplat, 2f);
-                    }
-                    else
-                    {
-                        UnityEngine.Object.Destroy(rightplat);
-                    }
-                    rightplat = null;
-                    if (platformMode == 4 && leftplat == null)
-                    {
-                        UpdateClipColliders(true);
+                        if (GetIndex("Platform Gravity").enabled)
+                        {
+                            rightplat.AddComponent(typeof(Rigidbody));
+                            UnityEngine.Object.Destroy(rightplat.GetComponent<Collider>());
+                            UnityEngine.Object.Destroy(rightplat, 2f);
+                        }
+                        else
+                        {
+                            UnityEngine.Object.Destroy(rightplat);
+                        }
+                        rightplat = null;
+                        if (platformMode == 4 && leftplat == null)
+                        {
+                            UpdateClipColliders(true);
+                        }
                     }
                 }
             }
-        }
 
         public static void TriggerPlatforms()
         {
@@ -440,45 +380,7 @@ namespace LegallyStupid.Mods
             GetIndex("Change Speed Boost Amount").overlapText = "Change Speed Boost Amount <color=grey>[</color><color=green>" + speedNames[speedboostCycle] + "</color><color=grey>]</color>";
         }
 
-        public static void PlatformSpam()
-        {
-            if (rightGrab || Mouse.current.rightButton.isPressed)
-            {
-                GameObject platform = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                UnityEngine.Object.Destroy(platform.GetComponent<BoxCollider>());
-                platform.GetComponent<Renderer>().material.color = bgColorA;
-                platform.GetComponent<Renderer>().material.shader = Shader.Find("GorillaTag/UberShader");
-                platform.transform.localScale = new Vector3(0.025f, 0.3f, 0.4f);
-                platform.transform.position = GorillaTagger.Instance.rightHandTransform.position;
-                platform.transform.rotation = GorillaTagger.Instance.rightHandTransform.rotation;
-                UnityEngine.Object.Destroy(platform, 1f);
-                PhotonNetwork.RaiseEvent(69, new object[2] { platform.transform.position, platform.transform.rotation }, new RaiseEventOptions { Receivers = ReceiverGroup.Others }, SendOptions.SendReliable);
-            }
-        }
-
-        public static void PlatformGun()
-        {
-            if (rightGrab || Mouse.current.rightButton.isPressed)
-            {
-                var GunData = RenderGun();
-                RaycastHit Ray = GunData.Ray;
-                GameObject NewPointer = GunData.NewPointer;
-
-                if (rightTrigger > 0.5f || Mouse.current.leftButton.isPressed)
-                {
-                    GameObject platform = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    UnityEngine.Object.Destroy(platform.GetComponent<BoxCollider>());
-                    platform.GetComponent<Renderer>().material.color = bgColorA;
-                    platform.GetComponent<Renderer>().material.shader = Shader.Find("GorillaTag/UberShader");
-                    platform.transform.localScale = new Vector3(0.025f, 0.3f, 0.4f);
-                    platform.transform.position = NewPointer.transform.position;
-                    platform.transform.rotation = Quaternion.Euler(UnityEngine.Random.Range(0, 360), UnityEngine.Random.Range(0, 360), UnityEngine.Random.Range(0, 360));
-                    UnityEngine.Object.Destroy(platform, 1f);
-                    PhotonNetwork.RaiseEvent(69, new object[2] { platform.transform.position, platform.transform.rotation }, new RaiseEventOptions { Receivers = ReceiverGroup.Others }, SendOptions.SendReliable);
-                }
-            }
-        }
-
+      
         public static void ChangeFlySpeed()
         {
             flySpeedCycle++;
@@ -574,57 +476,12 @@ namespace LegallyStupid.Mods
             }
         }
 
-        public static void SlingshotFly()
-        {
-            if (rightPrimary)
-            {
-                GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity += GorillaLocomotion.Player.Instance.headCollider.transform.forward * Time.deltaTime * (flySpeed * 2);
-            }
-        }
-
-        public static void ZeroGravitySlingshotFly()
-        {
-            if (rightPrimary)
-            {
-                ZeroGravity();
-                GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity += GorillaLocomotion.Player.Instance.headCollider.transform.forward * Time.deltaTime * flySpeed;
-            }
-        }
-
-        
-
         private static float driveSpeed = 0f;
         public static int driveInt = 0;
-        public static void ChangeDriveSpeed()
-        {
-            speedboostCycle++;
-            if (speedboostCycle > 3)
-            {
-                speedboostCycle = 0;
-            }
-
-            float[] speedamounts = new float[] { 10f, 30f, 50f, 3f };
-            driveSpeed = speedamounts[speedboostCycle];
-
-            string[] speedNames = new string[] { "Normal", "Fast", "Ultra Fast", "Slow" };
-            GetIndex("cdSpeed").overlapText = "Change Drive Speed <color=grey>[</color><color=green>" + speedNames[speedboostCycle] + "</color><color=grey>]</color>";
-        }
+       
 
         public static Vector2 lerpygerpy = Vector2.zero;
-        public static void Drive()
-        {
-            Vector2 joy = SteamVR_Actions.gorillaTag_LeftJoystick2DAxis.axis;
-            lerpygerpy = Vector2.Lerp(lerpygerpy, joy, 0.05f);
-
-            Vector3 addition = GorillaTagger.Instance.bodyCollider.transform.forward * lerpygerpy.y + GorillaTagger.Instance.bodyCollider.transform.right * lerpygerpy.x;// + new Vector3(0f, -1f, 0f);
-            Physics.Raycast(GorillaTagger.Instance.bodyCollider.transform.position - new Vector3(0f, 0.2f, 0f), Vector3.down, out var Ray, 512f, NoInvisLayerMask());
-
-            if (Ray.distance < 0.2f && (Mathf.Abs(lerpygerpy.x) > 0.05f || Mathf.Abs(lerpygerpy.y) > 0.05f))
-            {
-                GorillaTagger.Instance.bodyCollider.attachedRigidbody.velocity = addition * 10f;
-            }
-        }
-
+      
         public static void IronMan()
         {
             if (leftPrimary)
@@ -709,7 +566,6 @@ namespace LegallyStupid.Mods
                 UnityEngine.Object.Destroy(NewPointer.GetComponent<Rigidbody>());
                 UnityEngine.Object.Destroy(NewPointer.GetComponent<Collider>());
                 UnityEngine.Object.Destroy(NewPointer, Time.deltaTime);
-
                 GameObject line = new GameObject("Line");
                 LineRenderer liner = line.AddComponent<LineRenderer>();
                 liner.material.shader = Shader.Find("GUI/Text Shader");
@@ -949,81 +805,11 @@ namespace LegallyStupid.Mods
             UnityEngine.Object.Destroy(rightjoint);
         }
 
-       
-
-        public static void UpAndDown()
-        {
-            if ((rightTrigger > 0.5f) || rightGrab)
-            {
-                ZeroGravity();
-            }
-            if (rightTrigger > 0.5f)
-            {
-                GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity += Vector3.up * Time.deltaTime * flySpeed * 3f;
-            }
-
-            if (rightGrab)
-            {
-                GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity += Vector3.up * Time.deltaTime * flySpeed * -3f;
-            }
-        }
-
-        public static void LeftAndRight()
-        {
-            if ((rightTrigger > 0.5f) || rightGrab)
-            {
-                ZeroGravity();
-            }
-            if (rightTrigger > 0.5f)
-            {
-                GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity += GorillaTagger.Instance.bodyCollider.transform.right * Time.deltaTime * flySpeed * -3f;
-            }
-
-            if (rightGrab)
-            {
-                GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity += GorillaTagger.Instance.bodyCollider.transform.right * Time.deltaTime * flySpeed * 3f;
-            }
-        }
-
-        public static void ForwardsAndBackwards()
-        {
-            if ((rightTrigger > 0.5f) || rightGrab)
-            {
-                ZeroGravity();
-            }
-            if (rightTrigger > 0.5f)
-            {
-                GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity += GorillaTagger.Instance.bodyCollider.transform.forward * Time.deltaTime * flySpeed * 3f;
-            }
-
-            if (rightGrab)
-            {
-                GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity += GorillaTagger.Instance.bodyCollider.transform.forward * Time.deltaTime * flySpeed * -3f;
-            }
-        }
-
-       
-
-        public static void LowGravity()
-        {
-            GorillaLocomotion.Player.Instance.bodyCollider.attachedRigidbody.AddForce(Vector3.up * (Time.deltaTime * (6.66f / Time.deltaTime)), ForceMode.Acceleration);
-        }
-
         public static void ZeroGravity()
         {
             GorillaLocomotion.Player.Instance.bodyCollider.attachedRigidbody.AddForce(Vector3.up * (Time.deltaTime * (9.81f / Time.deltaTime)), ForceMode.Acceleration);
         }
 
-        public static void HighGravity()
-        {
-            GorillaLocomotion.Player.Instance.bodyCollider.attachedRigidbody.AddForce(Vector3.down * (Time.deltaTime * (7.77f / Time.deltaTime)), ForceMode.Acceleration);
-        }
-
-        public static void ReverseGravity()
-        {
-            GorillaLocomotion.Player.Instance.bodyCollider.attachedRigidbody.AddForce(Vector3.up * (Time.deltaTime * (19.62f / Time.deltaTime)), ForceMode.Acceleration);
-            GorillaLocomotion.Player.Instance.rightControllerTransform.parent.rotation = Quaternion.Euler(180f, 0f, 0f);
-        }
         public static void WallWalk()
         {
             if (GorillaLocomotion.Player.Instance.wasLeftHandTouching || GorillaLocomotion.Player.Instance.wasRightHandTouching)
@@ -1083,124 +869,7 @@ namespace LegallyStupid.Mods
 
 
         private static int rememberPageNumber = 0;
-        public static void EnterTeleportToPlayer()
-        {
-            rememberPageNumber = pageNumber;
-            buttonsType = 29;
-            pageNumber = 0;
-            List<ButtonInfo> tpbuttons = new List<ButtonInfo> { new ButtonInfo { buttonText = "Exit Teleport to Player", method = () => ExitTeleportToPlayer(), isTogglable = false, toolTip = "Returns you back to the movement mods." } };
-            foreach (Player plr in PhotonNetwork.PlayerListOthers)
-            {
-                tpbuttons.Add(new ButtonInfo { buttonText = "TeleportPlayer"+tpbuttons.Count.ToString(), overlapText = ToTitleCase(plr.NickName), method = () => TeleportToPlayer(plr), isTogglable = false, toolTip = "Teleports you to " + ToTitleCase(plr.NickName) + "." });
-            }
-            Buttons.buttons[29] = tpbuttons.ToArray();
-        }
-
-        public static void TeleportToPlayer(Player plr)
-        {
-            TeleportPlayer(GetVRRigFromPlayer(plr).headMesh.transform.position);
-        }
-
-        public static void ExitTeleportToPlayer()
-        {
-            Settings.EnableMovement();
-            pageNumber = rememberPageNumber;
-        }
-
-        public static void EnterTeleportToMap() // Credits to Malachi for the positions
-        {
-            rememberPageNumber = pageNumber;
-            buttonsType = 29;
-            pageNumber = 0;
-            List<ButtonInfo> tpbuttons = new List<ButtonInfo> { new ButtonInfo { buttonText = "Exit Teleport to Map", method = () => ExitTeleportToPlayer(), isTogglable = false, toolTip = "Returns you back to the movement mods." } };
-            string[][] mapData = new string[][]
-            {
-                new string[] // Forest
-                {
-                    "Forest",
-                    "Environment Objects/TriggerZones_Prefab/ZoneTransitions_Prefab/Regional Transition/TreeRoomSpawnForestZone",
-                    "Environment Objects/TriggerZones_Prefab/JoinRoomTriggers_Prefab/JoinPublicRoom - Forest, Tree Exit"
-                },
-                new string[] // City
-                {
-                    "City",
-                    "Environment Objects/TriggerZones_Prefab/ZoneTransitions_Prefab/Regional Transition/ForestToCity",
-                    "Environment Objects/TriggerZones_Prefab/JoinRoomTriggers_Prefab/JoinPublicRoom - City Front"
-                },
-                new string[] // Canyons
-                {
-                    "Canyons",
-                    "Environment Objects/TriggerZones_Prefab/ZoneTransitions_Prefab/Regional Transition/ForestCanyonTransition",
-                    "Environment Objects/TriggerZones_Prefab/JoinRoomTriggers_Prefab/JoinPublicRoom - Canyon"
-                },
-                new string[] // Clouds
-                {
-                    "Clouds",
-                    "Environment Objects/TriggerZones_Prefab/ZoneTransitions_Prefab/Regional Transition/CityToSkyJungle",
-                    "Environment Objects/TriggerZones_Prefab/JoinRoomTriggers_Prefab/JoinPublicRoom - Clouds From Computer"
-                },
-                new string[] // Caves
-                {
-                    "Caves",
-                    "Environment Objects/TriggerZones_Prefab/ZoneTransitions_Prefab/Regional Transition/ForestToCave",
-                    "Environment Objects/TriggerZones_Prefab/JoinRoomTriggers_Prefab/JoinPublicRoom - Cave"
-                },
-                new string[] // Beach
-                {
-                    "Beach",
-                    "Environment Objects/TriggerZones_Prefab/ZoneTransitions_Prefab/Regional Transition/BeachToForest",
-                    "Environment Objects/TriggerZones_Prefab/JoinRoomTriggers_Prefab/JoinPublicRoom - Beach for Computer"
-                },
-                new string[] // Mountains
-                {
-                    "Mountains",
-                    "Environment Objects/TriggerZones_Prefab/ZoneTransitions_Prefab/Regional Transition/CityToMountain",
-                    "Environment Objects/TriggerZones_Prefab/JoinRoomTriggers_Prefab/JoinPublicRoom - Mountain"
-                },
-                new string[] // Basement
-                {
-                    "Basement",
-                    "Environment Objects/TriggerZones_Prefab/ZoneTransitions_Prefab/Regional Transition/CityToBasement",
-                    "Environment Objects/TriggerZones_Prefab/JoinRoomTriggers_Prefab/JoinPublicRoom - Basement For Computer"
-                },
-                new string[] // Metropolis
-                {
-                    "Metropolis",
-                    "Environment Objects/TriggerZones_Prefab/ZoneTransitions_Prefab/Regional Transition/MetropolisOnly",
-                    "Environment Objects/TriggerZones_Prefab/JoinRoomTriggers_Prefab/JoinPublicRoom - Metropolis from Computer"
-                },
-                new string[] // Arcade
-                {
-                    "Arcade",
-                    "Environment Objects/TriggerZones_Prefab/ZoneTransitions_Prefab/Regional Transition/CityToArcade",
-                    "Environment Objects/TriggerZones_Prefab/JoinRoomTriggers_Prefab/JoinPublicRoom - City frm Arcade"
-                },
-                new string[] // Rotating
-                {
-                    "Rotating",
-                    "Environment Objects/TriggerZones_Prefab/ZoneTransitions_Prefab/Regional Transition/CityToRotating",
-                    "Environment Objects/TriggerZones_Prefab/JoinRoomTriggers_Prefab/JoinPublicRoom - Rotating Map"
-                },
-                new string[] // Bayou
-                {
-                    "Bayou",
-                    "Environment Objects/TriggerZones_Prefab/ZoneTransitions_Prefab/Regional Transition/BayouOnly",
-                    "Environment Objects/TriggerZones_Prefab/JoinRoomTriggers_Prefab/JoinPublicRoom - BayouComputer2"
-                },
-            };
-            foreach (string[] Data in mapData)
-            {
-                tpbuttons.Add(new ButtonInfo { buttonText = "TeleportMap" + tpbuttons.Count.ToString(), overlapText = Data[0], method = () => TeleportToMap(Data[1], Data[2]), isTogglable = false, toolTip = "Teleports you to the " + Data[0] + " map." });
-            }
-            Buttons.buttons[29] = tpbuttons.ToArray();
-        }
-
-        public static void TeleportToMap(string zone, string pos)
-        {
-            GameObject.Find(zone).GetComponent<GorillaSetZoneTrigger>().OnBoxTriggered();
-            TeleportPlayer(GameObject.Find(pos).transform.position);
-        }
-
+      
         public static void TeleportGun()
         {
             if (rightGrab || Mouse.current.rightButton.isPressed)
@@ -1214,24 +883,6 @@ namespace LegallyStupid.Mods
                     closePosition = Vector3.zero;
                     TeleportPlayer(NewPointer.transform.position + new Vector3(0f, 1f, 0f));
                     GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    teleDebounce = Time.time + 0.5f;
-                }
-            }
-        }
-
-        public static void Airstrike()
-        {
-            if (rightGrab || Mouse.current.rightButton.isPressed)
-            {
-                var GunData = RenderGun();
-                RaycastHit Ray = GunData.Ray;
-                GameObject NewPointer = GunData.NewPointer;
-
-                if ((rightTrigger > 0.5f || Mouse.current.leftButton.isPressed) && Time.time > teleDebounce)
-                {
-                    GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity = new Vector3(0f, -20f, 0f);
-                    TeleportPlayer(NewPointer.transform.position + new Vector3(0f, 30f, 0f));
-                    GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity = new Vector3(0f, -20f, 0f);
                     teleDebounce = Time.time + 0.5f;
                 }
             }
@@ -1272,46 +923,6 @@ namespace LegallyStupid.Mods
             {
                 UnityEngine.Object.Destroy(CheckPoint);
                 CheckPoint = null;
-            }
-        }
-
-        public static GameObject BombObject = null;
-        public static void Bomb()
-        {
-            if (rightGrab)
-            {
-                if (BombObject == null)
-                {
-                    BombObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    UnityEngine.Object.Destroy(BombObject.GetComponent<Rigidbody>());
-                    UnityEngine.Object.Destroy(BombObject.GetComponent<SphereCollider>());
-                    BombObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-                }
-                BombObject.transform.position = GorillaTagger.Instance.rightHandTransform.position;
-            }
-            if (BombObject != null)
-            {
-                if (rightPrimary)
-                {
-                    Vector3 dir = (GorillaTagger.Instance.bodyCollider.transform.position - BombObject.transform.position);
-                    dir.Normalize();
-                    GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity += 25f * dir;
-                    UnityEngine.Object.Destroy(BombObject);
-                    BombObject = null;
-                }
-                else
-                {
-                    BombObject.GetComponent<Renderer>().material.color = buttonDefaultA;
-                }
-            }
-        }
-
-        public static void DisableBomb()
-        {
-            if (BombObject != null)
-            {
-                UnityEngine.Object.Destroy(BombObject);
-                BombObject = null;
             }
         }
 
@@ -1440,29 +1051,14 @@ namespace LegallyStupid.Mods
             }
         }
 
-        /*
+
         public static void DisableSpeedBoost()
         {
             GorillaLocomotion.Player.Instance.maxJumpSpeed = 6.5f;
             GorillaLocomotion.Player.Instance.jumpMultiplier = 1.1f;
-        }*/
-
-        public static void UncapMaxVelocity()
-        {
-            GorillaLocomotion.Player.Instance.maxJumpSpeed = 99999f;
         }
 
-        public static void AlwaysMaxVelocity()
-        {
-            if (GetIndex("Uncap Max Velocity").enabled)
-            {
-                Toggle("Uncap Max Velocity");
-            }
-            else
-            {
-                GorillaLocomotion.Player.Instance.jumpMultiplier = 99999f;
-            }
-        }
+      
 
         public static void UpdateClipColliders(bool enabledd)
         {
@@ -1799,9 +1395,5 @@ namespace LegallyStupid.Mods
 
         public static List<ForceVolume> fvol = new List<ForceVolume> { };
 
-
-        
-       
-       
     }
 }
