@@ -1,7 +1,7 @@
 using BepInEx;
 using System.Reflection;
 
-[assembly: AssemblyCompany("goldentrophy")]
+[assembly: AssemblyCompany("iidk-ciperuoy")]
 [assembly: AssemblyConfiguration("Debug")]
 [assembly: AssemblyFileVersion(LegallyStupid.PluginInfo.Version + ".0")]
 [assembly: AssemblyInformationalVersion(LegallyStupid.PluginInfo.Version)]
