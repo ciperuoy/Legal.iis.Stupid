@@ -1,4 +1,5 @@
 using BepInEx;
+using Photon.Pun;
 using System;
 using System.ComponentModel;
 using UnityEngine;
@@ -19,6 +20,19 @@ namespace LegallyStupid
             Loading.AddComponent<Notifications.NotifiLib>();
             Loading.AddComponent<Classes.CoroutineManager>();
             DontDestroyOnLoad(Loading);
+            GorillaTagger.OnPlayerSpawned(OnGameInitialized);
         }
+        void OnGameInitialized()
+        {
+
+        }
+        private void Update()
+        {
+            if (!PhotonNetwork.InRoom) OnModdedJoined();
+            else if (!NetworkSystem.Instance.GameModeString.Contains("MODDED")) OnModdedLeft();
+            GorillaTagger.OnPlayerSpawned(OnGameInitialized);
+        }
+        void OnModdedJoined() { }
+        void OnModdedLeft() { }
     }
 }
