@@ -1,5 +1,6 @@
 using BepInEx;
 using Photon.Pun;
+using Photon.Realtime;
 using System;
 using System.ComponentModel;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace LegallyStupid
     [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
     public class Plugin : BaseUnityPlugin
     {
+        bool inRoom;
         private void Start()
         {
             Console.Title = "Legally Stupid Menu /~/ Build " + PluginInfo.Version;
@@ -32,7 +34,13 @@ namespace LegallyStupid
             else if (!NetworkSystem.Instance.GameModeString.Contains("MODDED")) OnModdedLeft();
             GorillaTagger.OnPlayerSpawned(OnGameInitialized);
         }
-        void OnModdedJoined() { }
-        void OnModdedLeft() { }
+        void OnModdedJoined()
+        {
+            inRoom = true;
+        } 
+        void OnModdedLeft()
+        {
+            inRoom = false;
+        }
     }
 }
