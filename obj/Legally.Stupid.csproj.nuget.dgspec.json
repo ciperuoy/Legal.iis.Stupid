@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Zayne.ZaynesLaptop\\Legally.Stupid-master\\Legally.Stupid.csproj": {}
+    "C:\\Users\\Izaac\\Source\\Repos\\Legally.Stupid\\Legally.Stupid.csproj": {}
   },
   "projects": {
-    "D:\\Zayne.ZaynesLaptop\\Legally.Stupid-master\\Legally.Stupid.csproj": {
+    "C:\\Users\\Izaac\\Source\\Repos\\Legally.Stupid\\Legally.Stupid.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Zayne.ZaynesLaptop\\Legally.Stupid-master\\Legally.Stupid.csproj",
-        "projectName": "Legally Stupid Menu",
-        "projectPath": "D:\\Zayne.ZaynesLaptop\\Legally.Stupid-master\\Legally.Stupid.csproj",
-        "packagesPath": "C:\\Users\\Zayne.ZaynesLaptop\\.nuget\\packages\\",
-        "outputPath": "D:\\Zayne.ZaynesLaptop\\Legally.Stupid-master\\obj\\",
+        "projectUniqueName": "C:\\Users\\Izaac\\Source\\Repos\\Legally.Stupid\\Legally.Stupid.csproj",
+        "projectName": "LegallyStupid",
+        "projectPath": "C:\\Users\\Izaac\\Source\\Repos\\Legally.Stupid\\Legally.Stupid.csproj",
+        "packagesPath": "C:\\Users\\Izaac\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Izaac\\Source\\Repos\\Legally.Stupid\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "D:\\Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Zayne.ZaynesLaptop\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Izaac\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -64,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

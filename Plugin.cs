@@ -7,6 +7,7 @@ using Photon.Pun;
 using System;
 using System.ComponentModel;
 using UnityEngine;
+using Viveport;
 using static LegallyStupid.Menu.Main;
 
 namespace LegallyStupid
@@ -15,6 +16,7 @@ namespace LegallyStupid
     [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
     public class Plugin : BaseUnityPlugin
     {
+        public static bool inRoom;  
         private void Start()
         {
             Console.Title = "Legally Stupid Menu /~/ Build " + PluginInfo.Version;
@@ -36,12 +38,13 @@ namespace LegallyStupid
             if (!PhotonNetwork.InRoom) OnModdedJoined();
             else if (!NetworkSystem.Instance.GameModeString.Contains("MODDED")) OnModdedLeft();
         }
-        void OnModdedJoined()
+        public void OnModdedJoined()
         {
-
+            inRoom = true;
         }
-        void OnModdedLeft()
+        public void OnModdedLeft()
         {
+            inRoom = false;
             foreach (ButtonInfo[] buttonlist in Buttons.buttons)
             {
                 foreach (ButtonInfo v in buttonlist)

@@ -50,6 +50,8 @@ namespace LegallyStupid.Menu
     {
         public static void Prefix()
         {
+            if(Plugin.inRoom)
+            
             try
             {
                 bool isKeyboardCondition = UnityInput.Current.GetKey(KeyCode.Q) || (isSearching && isPcWhenSearching);
