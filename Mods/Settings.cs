@@ -46,7 +46,7 @@ namespace LegallyStupid.Mods
                             {
                                 for (int j = 0; j < v.transform.childCount; j++)
                                 {
-                                    Text lol = v.transform.GetChild(j).gameObject.GetComponent<TextMeshPro>();
+                                    Text lol = v.transform.GetChild(j).gameObject.GetComponent<Text>();
                                     lol.color = textColor;
                                 }
                             } else
@@ -875,29 +875,7 @@ namespace LegallyStupid.Mods
                     textColor = Color.white;
                     textClicked = Color.white;
                     break;
-                case 36: // ShibaGT Gold
-                    bgColorA = Color.black;
-                    bgColorB = Color.gray;
-                    buttonDefaultA = Color.yellow;
-                    buttonDefaultB = Color.yellow;
-                    buttonClickedA = Color.magenta;
-                    buttonClickedB = Color.magenta;
-                    titleColor = Color.white;
-                    textColor = Color.black;
-                    textClicked = Color.black;
-                    break;
-                case 37: // ShibaGT Genesis
-                    bgColorA = Color.black;
-                    bgColorB = Color.black;
-                    buttonDefaultA = new Color32(32, 32, 32, 255);
-                    buttonDefaultB = new Color32(32, 32, 32, 255);
-                    buttonClickedA = new Color32(32, 32, 32, 255);
-                    buttonClickedB = new Color32(32, 32, 32, 255);
-                    titleColor = Color.white;
-                    textColor = Color.black;
-                    textClicked = Color.white;
-                    break;
-                case 38: // wyvern
+                case 36: // wyvern
                     bgColorA = new Color32(199, 115, 173, 255);
                     bgColorB = new Color32(165, 233, 185, 255);
                     buttonDefaultA = new Color32(99, 58, 86, 255);
@@ -908,7 +886,7 @@ namespace LegallyStupid.Mods
                     textColor = Color.white;
                     textClicked = Color.green;
                     break;
-                case 39: // Steal (new)
+                case 37: // Steal (new)
                     bgColorA = new Color32(27, 27, 27, 255);
                     bgColorB = new Color32(27, 27, 27, 255);
                     buttonDefaultA = new Color32(50, 50, 50, 255);
@@ -919,18 +897,7 @@ namespace LegallyStupid.Mods
                     textColor = Color.white;
                     textClicked = Color.white;
                     break;
-                case 40: // USA Menu (lol)
-                    bgColorA = Color.black;
-                    bgColorB = new Color32(100, 25, 125, 255);
-                    buttonDefaultA = new Color32(25, 25, 25, 255);
-                    buttonDefaultB = new Color32(25, 25, 25, 255);
-                    buttonClickedA = Color.green;
-                    buttonClickedB = Color.green;
-                    titleColor = Color.white;
-                    textColor = Color.white;
-                    textClicked = Color.white;
-                    break;
-                case 41: // Watch
+                case 38: // Watch
                     bgColorA = new Color32(27, 27, 27, 255);
                     bgColorB = new Color32(27, 27, 27, 255);
                     buttonDefaultA = Color.red;
@@ -941,18 +908,7 @@ namespace LegallyStupid.Mods
                     textColor = Color.white;
                     textClicked = Color.white;
                     break;
-                case 42: // AZ Menu
-                    bgColorA = Color.black;
-                    bgColorB = new Color32(100, 0, 0, 255);
-                    buttonDefaultA = Color.black;
-                    buttonDefaultB = Color.black;
-                    buttonClickedA = new Color32(100, 0, 0, 255);
-                    buttonClickedB = new Color32(100, 0, 0, 255);
-                    titleColor = Color.white;
-                    textColor = Color.white;
-                    textClicked = Color.white;
-                    break;
-                case 43: // ImGUI
+                case 39: // ImGUI
                     bgColorA = new Color32(21, 22, 23, 255);
                     bgColorB = new Color32(21, 22, 23, 255);
                     buttonDefaultA = new Color32(32, 50, 77, 255);
@@ -963,7 +919,7 @@ namespace LegallyStupid.Mods
                     textColor = Color.white;
                     textClicked = Color.white;
                     break;
-                case 44: // Clean Dark
+                case 40: // Clean Dark
                     bgColorA = Color.black;
                     bgColorB = Color.black;
                     buttonDefaultA = Color.black;
@@ -974,7 +930,7 @@ namespace LegallyStupid.Mods
                     textColor = Color.white;
                     textClicked = Color.white;
                     break;
-                case 45: // Discord Light Mode (lmfao)
+                case 41: // Light Mode (lmfao)
                     bgColorA = Color.white;
                     bgColorB = Color.white;
                     buttonDefaultA = Color.white;
@@ -985,18 +941,7 @@ namespace LegallyStupid.Mods
                     textColor = Color.black;
                     textClicked = Color.black;
                     break;
-                case 46: // The Hub
-                    bgColorA = Color.black;
-                    bgColorB = Color.black;
-                    buttonDefaultA = new Color32(255, 163, 26, 255);
-                    buttonDefaultB = new Color32(255, 163, 26, 255);
-                    buttonClickedA = Color.black;
-                    buttonClickedB = Color.black;
-                    titleColor = Color.white;
-                    textColor = Color.black;
-                    textClicked = Color.white;
-                    break;
-                case 47: // EPILEPTIC
+                case 42: // EPILEPTIC
                     bgColorA = Color.black;
                     bgColorB = Color.black;
                     buttonDefaultA = Color.black;
@@ -1007,18 +952,7 @@ namespace LegallyStupid.Mods
                     textColor = Color.white;
                     textClicked = Color.white;
                     break;
-                case 48: // Discord Blurple
-                    bgColorA = new Color32(111, 143, 255, 255);
-                    bgColorB = new Color32(163, 184, 255, 255);
-                    buttonDefaultA = new Color32(96, 125, 219, 255);
-                    buttonDefaultB = new Color32(96, 125, 219, 255);
-                    buttonClickedA = new Color32(147, 167, 226, 255);
-                    buttonClickedB = new Color32(147, 167, 226, 255);
-                    titleColor = new Color32(33, 33, 101, 255);
-                    textColor = new Color32(33, 33, 101, 255);
-                    textClicked = new Color32(33, 33, 101, 255);
-                    break;
-                case 49: // VS Zero
+                case 43: // VS Zero
                     bgColorA = new Color32(19, 22, 27, 255);
                     bgColorB = new Color32(19, 22, 27, 255);
                     buttonDefaultA = new Color32(19, 22, 27, 255);
@@ -1029,18 +963,7 @@ namespace LegallyStupid.Mods
                     textColor = new Color32(82, 96, 122, 255);
                     textClicked = new Color32(82, 96, 122, 255);
                     break;
-                case 50: // Weed theme (for v4.2.0) (also 50th theme)
-                    bgColorA = new Color32(0, 136, 16, 255);
-                    bgColorB = new Color32(0, 127, 14, 255);
-                    buttonDefaultA = new Color32(0, 158, 15, 255);
-                    buttonDefaultB = new Color32(0, 158, 15, 255);
-                    buttonClickedA = new Color32(0, 112, 11, 255);
-                    buttonClickedB = new Color32(0, 112, 11, 255);
-                    titleColor = Color.white;
-                    textColor = Color.white;
-                    textClicked = Color.white;
-                    break;
-                case 51: // Pastel Rainbow
+                case 44: // Pastel Rainbow
                     bgColorA = Color.white;
                     bgColorB = Color.white;
                     buttonDefaultA = Color.white;
@@ -1051,7 +974,7 @@ namespace LegallyStupid.Mods
                     textColor = Color.black;
                     textClicked = Color.black;
                     break;
-                case 52: // Rift Light
+                case 45: // Rift Light
                     bgColorA = new Color32(25, 25, 25, 255);
                     bgColorB = new Color32(25, 25, 25, 255);
                     buttonDefaultA = new Color32(40, 40, 40, 255);
@@ -1809,7 +1732,7 @@ namespace LegallyStupid.Mods
                     if (gtagfont == null)
                     {
                         GameObject fart = LoadAsset("gtag");
-                        gtagfont = fart.transform.Find("text").gameObject.GetComponent<TextMeshPro>().font;
+                        gtagfont = fart.transform.Find("text").gameObject.GetComponent<Text>().font;
                         UnityEngine.Object.Destroy(fart);
                     }
                     activeFont = gtagfont;
@@ -2240,7 +2163,7 @@ namespace LegallyStupid.Mods
                 }
             }
 
-            string ihateyouguys = platformMode + seperator + platformShape + seperator + flySpeedCycle + seperator + longarmCycle + seperator + speedboostCycle + seperator + projmode + seperator + trailmode + seperator + shootCycle + seperator + pointerIndex + seperator + tagAuraIndex + seperator + notificationDecayTime + seperator + fontStyleType + seperator + arrowType + seperator + pcbg + seperator + internetTime + seperator + hotkeyButton + seperator + buttonClickIndex + seperator + buttonClickVolume + seperator + Safety.antireportrangeindex + seperator + Advantages.tagRangeIndex + seperator + Sound.BindMode + seperator + Movement.driveInt + seperator + langInd;
+            string ihateyouguys = platformMode + seperator + platformShape + seperator + flySpeedCycle + seperator + speedboostCycle + seperator + trailmode + seperator + shootCycle + seperator + pointerIndex + seperator + notificationDecayTime + seperator + fontStyleType + seperator + arrowType + seperator + pcbg + seperator + internetTime + seperator + hotkeyButton + seperator + buttonClickIndex + seperator + buttonClickVolume + seperator + Movement.driveInt + seperator + langInd;
 
             string finaltext =
                 text + "\n" +
@@ -2301,7 +2224,6 @@ namespace LegallyStupid.Mods
                 flySpeedCycle = int.Parse(data[2]) - 1;
                 Movement.ChangeFlySpeed();
                 longarmCycle = int.Parse(data[3]) - 1;
-                Movement.ChangeArmLength();
                 speedboostCycle = int.Parse(data[4]) - 1;
                 Movement.ChangeSpeedBoostAmount();
                 projmode = int.Parse(data[5]) - 1;
@@ -2363,8 +2285,6 @@ namespace LegallyStupid.Mods
                 Movement.ChangePlatformShape();
                 flySpeedCycle = int.Parse(data[2]) - 1;
                 Movement.ChangeFlySpeed();
-                longarmCycle = int.Parse(data[3]) - 1;
-                Movement.ChangeArmLength();
                 speedboostCycle = int.Parse(data[4]) - 1;
                 Movement.ChangeSpeedBoostAmount();
                 projmode = int.Parse(data[5]) - 1;
@@ -2383,12 +2303,7 @@ namespace LegallyStupid.Mods
                 ChangeButtonSound();
                 buttonClickVolume = int.Parse(data[17]) - 1;
                 ChangeButtonVolume();
-                Safety.antireportrangeindex = int.Parse(data[18]) - 1;
-                Safety.ChangeAntiReportRange();
-                Sound.BindMode = int.Parse(data[20]) - 1;
-                Sound.SoundBindings();
                 Movement.driveInt = int.Parse(data[21]) - 1;
-                Movement.ChangeDriveSpeed();
                 langInd = int.Parse(data[22]) - 1;
                 ChangeMenuLanguage();
             } catch { UnityEngine.Debug.Log("Save file out of date"); }
